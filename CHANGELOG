@@ -1,0 +1,71 @@
+/**
+ * ProFTPd Admin - Changelog
+ *
+ * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
+ *
+ * @copyright Lex Brugman <lex_brugman@users.sourceforge.net>
+ * @copyright Christian Beer <djangofett@gmx.net>
+ * @copyright Ricardo Padilha <ricardo@droboports.com>
+ */
+
+Release: 2.2
+Changes:
+* added UID/GID limits (from Greg Arnold)
+* support for unix crypt() (from Greg Arnold)
+* support for mysqli interface (also makes it PHP 7.0 compatible)
+* updated ezSQL abstraction layer
+
+Release: 2.1
+Changes:
+* using Bootstrap for HTML styling
+* code cleanup in AdminClass.php:
+  * most of UI tasks are now implemented client-side
+  * consolidation of method results as associative arrays
+  * redundant and obsolete code removed
+* separation of editing and removal in different php files
+* fixed several bugs in the data model, e.g., updating a group's gid
+  also updates the gids of the users
+* support for sqlite3 database
+* support for pbkdf2 hash algorithm
+
+Release: 2.0
+Changes:
+* fixed small bugs and typos
+* fixed Additional Group mechanism
+* updated database schema for newer MySQL servers
+* added checks for empty database
+* added a userid prefix filter for managing a lot of users
+
+Release: 2.0b1
+Changes:
+* complete rework of old code into object-oriented model
+* use ezSQL as database abstraction layer
+* made header and footer real html that is parsed rather included
+* config changed from object into array (this will change in the future again)
+* maintainer changed from Lex Brugman to Christian Beer (with permission)
+
+Release Name: 1.04
+Changes:
+* Stopped using adodb
+* Sorting allows both ascending and descending now
+* Cleaned up the code a bit
+* Added a link to the project homepage to the footer
+
+Release Name: 1.03
+Changes:
+* Added a sort function in the user section
+* Made some layout changes in add/edit user and add group section
+
+Release Name: 1.02
+Changes:
+* When adding a user a random password is generated
+* The version number is in the title bar now
+
+Release Name: 1.01
+Changes:
+* Added a custom UID field to the add and edit user screen
+* Cleaned the code a bit
+
+Release Name: 1.0
+Changes:
+* Initial release
