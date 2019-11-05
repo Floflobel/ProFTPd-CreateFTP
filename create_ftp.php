@@ -176,22 +176,22 @@ include ("includes/header.php");
           <form role="form" class="form-horizontal" method="post" data-toggle="validator">
 	    <!-- Login -->
             <div class="form-group">
-              <label for="<?php echo $field_comment; ?>" class="col-sm-4 control-label">You are</label>
+              <label for="<?php echo $field_login; ?>" class="col-sm-4 control-label">You are</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_username; ?>" name="<?php echo $field_username; ?>" value="<?php echo $_SERVER['PHP_AUTH_USER'] ?>" placeholder="Username" required disabled />
+                <input type="text" class="form-control" id="<?php echo $field_login; ?>" name="<?php echo $field_login; ?>" value="<?php echo $_SERVER['PHP_AUTH_USER'] ?>" required disabled />
               </div>
             </div>
             <!-- FTP name -->
             <div class="form-group">
-              <label for="<?php echo $field_userid; ?>" class="col-sm-4 control-label">FTP name <font color="red">*</font></label>
+              <label for="<?php echo $field_ftpname; ?>" class="col-sm-4 control-label">FTP name <font color="red">*</font></label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_userid; ?>" name="<?php echo $field_userid; ?>" value="<?php echo $userid; ?>" placeholder="Mandatory user name" maxlength="<?php echo $cfg['max_userid_length']; ?>" pattern="<?php echo substr($cfg['userid_regex'], 2, -3); ?>" required />
-                <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_userid_length']; ?> characters.</small></p>
+                <input type="text" class="form-control" id="<?php echo $field_ftpname; ?>" name="<?php echo $field_ftpname; ?>" value="<?php echo $ftpname; ?>" placeholder="Name of your FTP" maxlength="<?php echo $cfg['max_ftpname_length']; ?>" pattern="<?php echo substr($cfg['ftpname_regex'], 2, -3); ?>" required />
+                <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_ftpname_length']; ?> characters.</small></p>
               </div>
             </div>
             <!-- Password -->
             <div class="form-group">
-              <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password <font color="red">*</font></label>
+              <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password</label>
               <div class="controls col-sm-8">
                 <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" placeholder="Mandatory password" minlength="<?php echo $cfg['min_passwd_length']; ?>" required disabled />
               </div>
@@ -205,7 +205,7 @@ include ("includes/header.php");
             </div>
             <!-- Ticket number -->
             <div class="form-group">
-              <label for="<?php echo $field_name; ?>" class="col-sm-4 control-label">Ticket number</label>
+              <label for="<?php echo $field_name; ?>" class="col-sm-4 control-label">Ticket number<font color="red">*</font></label>
               <div class="controls col-sm-8">
                 <input type="text" class="form-control" id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" value="<?php echo $name; ?>" placeholder="XX-XXX" required />
               </div>
