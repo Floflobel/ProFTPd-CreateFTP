@@ -114,13 +114,13 @@ include ("includes/header.php");
           <div class="form-group">
             <label>Prefix filter:</label>
             <div class="btn-group" role="group">
-              <a type="button" class="btn btn-default" href="users.php">All users</a>
-              <a type="button" class="btn btn-default" href="users.php?uf=None">No prefix</a>
+              <a type="button" class="btn btn-default" href="ftp_list.php">All users</a>
+              <a type="button" class="btn btn-default" href="ftp_list.php?uf=None">No prefix</a>
               <div class="btn-group" role="group">
                 <button type="button" class="btn btn-default dropdown-toggle" id="idPrefix" data-toggle="dropdown" aria-expanded="false">Prefix <span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="idPrefix">
                 <?php foreach ($userfilter as $uf) { ?>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="users.php?uf=<?php echo $uf; ?>"><?php echo $uf; ?></a></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="ftp_list.php?uf=<?php echo $uf; ?>"><?php echo $uf; ?></a></li>
                 <?php } ?>
                 </ul>
               </div>

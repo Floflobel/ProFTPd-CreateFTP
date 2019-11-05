@@ -40,7 +40,7 @@ $field_files_in_used  = $cfg['field_files_in_used'];
 $field_files_out_used = $cfg['field_files_out_used'];
 
 if (empty($_REQUEST[$field_id])) {
-  header("Location: users.php");
+  header("Location: ftp_list.php");
   die();
 }
 

@@ -41,7 +41,7 @@ include ("includes/header.php");
           <p><span class="form-control"><?php echo $ac->get_user_count(true); ?></span></p>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
-          <p><a class="btn btn-primary pull-right" href="users.php" role="button">View users &raquo;</a></p>
+          <p><a class="btn btn-primary pull-right" href="ftp_list.php" role="button">View users &raquo;</a></p>
         </div>
       </div>
     </div>

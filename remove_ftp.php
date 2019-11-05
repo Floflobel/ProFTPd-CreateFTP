@@ -21,7 +21,7 @@ $field_userid   = $cfg['field_userid'];
 $field_id       = $cfg['field_id'];
 
 if (empty($_REQUEST[$field_id])) {
-  header("Location: users.php");
+  header("Location: ftp_list.php");
   die();
 }
 
@@ -68,7 +68,7 @@ include ("includes/header.php");
           <!-- Actions -->
           <div class="form-group">
             <div class="col-sm-12">
-              <a class="btn btn-primary pull-right" href="users.php" role="button">View users &raquo;</a>
+              <a class="btn btn-primary pull-right" href="ftp_list.php" role="button">View users &raquo;</a>
             </div>
           </div>
         </div>

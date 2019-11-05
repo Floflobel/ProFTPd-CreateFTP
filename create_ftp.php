@@ -213,7 +213,7 @@ include ("includes/header.php");
             <!-- Actions -->
             <div class="form-group">
               <div class="col-sm-12">
-                <a class="btn btn-default" href="users.php">&laquo; View users</a>
+                <a class="btn btn-default" href="ftp_list.php">&laquo; View users</a>
                 <button type="submit" class="btn btn-primary pull-right" name="action" value="create">Create user</button>
               </div>
             </div>
