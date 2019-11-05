@@ -193,14 +193,14 @@ include ("includes/header.php");
             <div class="form-group">
               <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password <font color="red">*</font></label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" placeholder="Mandatory password" minlength="<?php echo $cfg['min_passwd_length']; ?>" required />
+                <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" placeholder="Mandatory password" minlength="<?php echo $cfg['min_passwd_length']; ?>" required disabled />
               </div>
             </div>
             <!-- Path -->
             <div class="form-group">
               <label for="<?php echo $field_name; ?>" class="col-sm-4 control-label">Path</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" value="<?php echo $name; ?>" placeholder="" required />
+                <input type="text" class="form-control" id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" value="<?php echo $name; ?>" placeholder="" required disabled />
               </div>
             </div>
             <!-- Ticket number -->
