@@ -93,7 +93,7 @@ include ("includes/header.php");
           </div>
           <!-- Actions -->
           <div class="form-group">
-            <a class="btn btn-primary pull-right" href="add_user.php" role="button">Add user &raquo;</a>
+            <a class="btn btn-primary pull-right" href="create_ftp.php" role="button">Create FTP &raquo;</a>
           </div>
         </div>
       </div>
@@ -149,7 +149,7 @@ include ("includes/header.php");
                 <?php foreach ($users as $user) { ?>
                   <tr>
                     <td class="pull-middle"><?php echo $user[$field_uid]; ?></td>
-                    <td class="pull-middle"><a href="edit_user.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><?php echo $user[$field_userid]; ?></a></td>
+                    <td class="pull-middle"><a href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><?php echo $user[$field_userid]; ?></a></td>
                     <td class="pull-middle"><?php echo $all_groups[$user[$field_ugid]]; ?></td>
                     <td class="pull-middle hidden-xs hidden-sm hidden-md"><?php echo $user[$field_last_login]; ?></td>
                     <td class="pull-middle hidden-xs hidden-sm"><?php echo $user[$field_login_count]; ?></td>
@@ -162,8 +162,8 @@ include ("includes/header.php");
                     <td class="pull-middle"><?php echo ($user[$field_disabled] ? 'Yes' : 'No'); ?></td>
                     <td class="pull-middle">
                       <div class="btn-toolbar pull-right" role="toolbar">
-                        <a class="btn-group" role="group" href="edit_user.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-                        <a class="btn-group" role="group" href="remove_user.php?action=remove&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                        <a class="btn-group" role="group" href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                        <a class="btn-group" role="group" href="remove_ftp.php?action=remove&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                       </div>
                     </td>
                   </tr>
@@ -173,7 +173,7 @@ include ("includes/header.php");
           </div>
           <!-- Actions -->
           <div class="form-group">
-            <a class="btn btn-primary pull-right" href="add_user.php" role="button">Add user &raquo;</a>
+            <a class="btn btn-primary pull-right" href="add_ftp.php" role="button">Create FTP &raquo;</a>
           </div>
         </div>
       </div>

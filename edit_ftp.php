@@ -328,7 +328,7 @@ include ("includes/header.php");
           <div class="form-group">
             <div class="col-sm-12">
               <input type="hidden" name="<?php echo $field_id; ?>" value="<?php echo $id; ?>" />
-              <a class="btn btn-danger" href="remove_user.php?action=remove&<?php echo $field_id; ?>=<?php echo $id; ?>">Remove user</a>
+              <a class="btn btn-danger" href="remove_ftp.php?action=remove&<?php echo $field_id; ?>=<?php echo $id; ?>">Remove user</a>
               <button type="submit" class="btn btn-primary pull-right" name="action" value="update">Update user</button>
             </div>
           </div>
