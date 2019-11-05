@@ -178,7 +178,7 @@ include ("includes/header.php");
             <div class="form-group">
               <label for="<?php echo $field_comment; ?>" class="col-sm-4 control-label">You are</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_username; ?>" name="<?php echo $field_username; ?>" value="<?php echo $_SERVER['PHP_AUTH_USER'] ?>" placeholder="Username" required />
+                <input type="text" class="form-control" id="<?php echo $field_username; ?>" name="<?php echo $field_username; ?>" value="<?php echo $_SERVER['PHP_AUTH_USER'] ?>" placeholder="Username" required disabled />
               </div>
             </div>
             <!-- FTP name -->
