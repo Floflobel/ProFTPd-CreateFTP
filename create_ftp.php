@@ -168,7 +168,7 @@ include ("includes/header.php");
 <div class="col-xs-12 col-sm-8 col-md-6 center">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Add user</h3>
+      <h3 class="panel-title">Add FTP</h3>
     </div>
     <div class="panel-body">
       <div class="row">
@@ -214,7 +214,7 @@ include ("includes/header.php");
             <div class="form-group">
               <div class="col-sm-12">
                 <a class="btn btn-default" href="ftp_list.php">&laquo; View users</a>
-                <button type="submit" class="btn btn-primary pull-right" name="action" value="create">Create user</button>
+                <button type="submit" class="btn btn-primary pull-right" name="action" value="create">Create FTP</button>
               </div>
             </div>
           </form>
