@@ -205,7 +205,7 @@ include ("includes/header.php");
             <div class="form-group">
               <label for="<?php echo $field_name; ?>" class="col-sm-4 control-label">Name</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" value="<?php echo $name; ?>" placeholder="Optional friendly name <?php get_current_user() ?>" />
+                <input type="text" class="form-control" id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" value="<?php echo $name; ?>" placeholder="Optional friendly name <?php echo $get_current_user() ?>" />
               </div>
             </div>
             <!-- Email -->
