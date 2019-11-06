@@ -62,7 +62,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
 		      $field_login    => $_SERVER['PHP_AUTH_USER'], 
                       $field_ftpname   => $_REQUEST[$field_ftpname],
                       $field_passwd   => $passwd,
-                      $field_path  => $cfg['default_path'] . $_REQUEST[$field_ftpname],
+                      $field_path  => $cfg['default_path'] . '/' . $_REQUEST[$field_ftpname],
                       $field_shell    => $cfg['default_shell']);
     if ($ac->add_user($userdata)) {
       $infomsg = 'User "'.$_REQUEST[$field_ftpname].'" created successfully.';
