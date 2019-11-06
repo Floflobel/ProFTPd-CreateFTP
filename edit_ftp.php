@@ -17,6 +17,7 @@ global $cfg;
 
 $ac = new AdminClass($cfg);
 
+$field_id      = $cfg['field_id'];
 $field_uid      = $cfg['field_uid'];
 $field_login    = $cfg['field_login'];
 $field_ftpname  = $cfg['field_ftpname'];
