@@ -79,7 +79,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
   if (count($errors) == 0) {
     /* update user */
     $userdata = array($field_id       => $_REQUEST[$field_id],
-                      $field_passwd   => $_REQUEST[$field_passwd],
+                      $field_passwd   => $_REQUEST[$field_passwd]);
     if (!$ac->update_user($userdata)) {
       $errormsg = 'User "'.$_REQUEST[$field_ftpname].'" update failed; check log files.';
     } else {
