@@ -17,19 +17,12 @@ global $cfg;
 
 $ac = new AdminClass($cfg);
 
-$field_userid   = $cfg['field_userid'];
-$field_id       = $cfg['field_id'];
 $field_uid      = $cfg['field_uid'];
-$field_ugid     = $cfg['field_ugid'];
-$field_ad_gid   = 'ad_gid';
+$field_login    = $cfg['field_login'];
+$field_ftpname  = $cfg['field_ftpname'];
 $field_passwd   = $cfg['field_passwd'];
-$field_homedir  = $cfg['field_homedir'];
+$field_path     = $cfg['field_path'];
 $field_shell    = $cfg['field_shell'];
-$field_name     = $cfg['field_name'];
-$field_company  = $cfg['field_company'];
-$field_email    = $cfg['field_email'];
-$field_comment  = $cfg['field_comment'];
-$field_disabled = $cfg['field_disabled'];
 
 $field_login_count    = $cfg['field_login_count'];
 $field_last_login     = $cfg['field_last_login'];
@@ -39,14 +32,13 @@ $field_bytes_out_used = $cfg['field_bytes_out_used'];
 $field_files_in_used  = $cfg['field_files_in_used'];
 $field_files_out_used = $cfg['field_files_out_used'];
 
-$passwd   = $ac->generate_random_string((int) $cfg['default_passwd_length']);;
+$passwd = $ac->generate_random_string((int) $cfg['default_passwd_length']);
 
 if (empty($_REQUEST[$field_id])) {
   header("Location: ftp_list.php");
   die();
 }
 
-$groups = $ac->get_groups();
 
 $id = $_REQUEST[$field_id];
 if (!$ac->is_valid_id($id)) {
@@ -55,24 +47,16 @@ if (!$ac->is_valid_id($id)) {
   $user = $ac->get_user_by_id($id);
   if (!is_array($user)) {
     $errormsg = 'User does not exist; cannot find ID '.$id.' in the database.';
-  } else {
-    $userid = $user[$field_userid];
-    $ugid = $user[$field_ugid];
-    $group = $ac->get_group_by_gid($ugid);
-    if (!$group) {
-      $warnmsg = 'Main group does not exist; cannot find GID '.$ugid.' in the database.';
-    }
-    $ad_gid = $ac->parse_groups($userid);
   }
 }
 
 if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "update") {
   $errors = array();
   /* user id validation */
-  if (empty($_REQUEST[$field_userid])
-      || !preg_match($cfg['userid_regex'], $_REQUEST[$field_userid])
-      || strlen($_REQUEST[$field_userid]) > $cfg['max_userid_length']) {
-    array_push($errors, 'Invalid user name; user name must contain only letters, numbers, hyphens, and underscores with a maximum of '.$cfg['max_userid_length'].' characters.');
+  if (empty($_REQUEST[$field_ftpname])
+      || !preg_match($cfg['ftpname_regex'], $_REQUEST[$field_ftpname])
+      || strlen($_REQUEST[$field_ftpname]) > $cfg['max_ftpname_length']) {
+    array_push($errors, 'Invalid user name; user name must contain only letters, numbers, hyphens, and underscores with a maximum of '.$cfg['max_ftpname_length'].' characters.');
   }
   /* uid validation */
   if (empty($user[$field_uid]) || !$ac->is_valid_id($user[$field_uid])) {
@@ -87,48 +71,22 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
   } else if ($cfg['min_uid'] != -1 && $user[$field_uid] < $cfg['min_uid']) {
     array_push($errors, 'Invalid UID; UID must be at least ' . $cfg['min_uid'] . '.');
   }
-  /* gid validation */
-  if (empty($_REQUEST[$field_ugid]) || !$ac->is_valid_id($_REQUEST[$field_ugid])) {
-    array_push($errors, 'Invalid main group; GID must be a positive integer.');
-  }
-  /* password length validation */
-  if (strlen($_REQUEST[$field_passwd]) > 0 && strlen($_REQUEST[$field_passwd]) < $cfg['min_passwd_length']) {
-    array_push($errors, 'Password is too short; minimum length is '.$cfg['min_passwd_length'].' characters.');
-  }
   /* shell validation */
   if (strlen($user[$field_shell]) <= 1) {
     array_push($errors, 'Invalid shell; shell cannot be empty.');
   }
   /* user name uniqueness validation */
-  if ($userid != $_REQUEST[$field_userid] && $ac->check_username($_REQUEST[$field_userid])) {
+  if ($ftpname != $_REQUEST[$field_ftpname] && $ac->check_username($_REQUEST[$field_ftpname])) {
     array_push($errors, 'User name already exists; name must be unique.');
-  }
-  /* gid existance validation */
-  if (!$ac->check_gid($_REQUEST[$field_ugid])) {
-    array_push($errors, 'Main group does not exist; GID '.$_REQUEST[$field_ugid].' cannot be found in the database.');
-  }
-  /* data validation passed */
-  if (count($errors) == 0) {
-    /* remove all groups */
-    while (list($g_gid, $g_group) = each($groups)) {
-      if (!$ac->remove_user_from_group($userid, $g_gid)) {
-        array_push($errors, 'Cannot remove user "'.$userid.'" from group "'.$g_group.'"; see log files for more information.');
-        break;
-      }
-      if($_REQUEST[$field_ugid] == $g_gid) {
-        $name_group = $g_group;
-      }
-    }
   }
   if (count($errors) == 0) {
     /* update user */
-    $disabled = isset($_REQUEST[$field_disabled]) ? '1':'0';
     $userdata = array($field_id       => $_REQUEST[$field_id],
-                      $field_userid   => $user[$field_userid],
+                      $field_ftpname   => $user[$field_ftpname],
                       $field_uid      => $user[$field_uid],
                       $field_ugid     => $_REQUEST[$field_ugid],
                       $field_passwd   => $_REQUEST[$field_passwd],
-                      $field_homedir  => $cfg['default_homedir'] . $name_group . "/" . $_REQUEST[$field_userid],
+                      $field_homedir  => $cfg['default_homedir'] . $name_group . "/" . $_REQUEST[$field_ftpname],
                       $field_shell    => $user[$field_shell],
                       $field_name     => $_REQUEST[$field_name],
                       $field_email    => $_REQUEST[$field_email],
@@ -136,7 +94,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
                       $field_comment  => $_REQUEST[$field_comment],
                       $field_disabled => $disabled);
     if (!$ac->update_user($userdata)) {
-      $errormsg = 'User "'.$_REQUEST[$field_userid].'" update failed; check log files.';
+      $errormsg = 'User "'.$_REQUEST[$field_ftpname].'" update failed; check log files.';
     } else {
       /* update user data */
       $user = $ac->get_user_by_id($id);
@@ -146,7 +104,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
   }
   if (empty($errormsg)) {
     /* update additional groups */
-    $infomsg = 'User "'.$_REQUEST[$field_userid].'" updated successfully.';
+    $infomsg = 'User "'.$_REQUEST[$field_ftpname].'" updated successfully.';
   }
 }
 
@@ -165,7 +123,7 @@ if (empty($errormsg)) {
   $disabled = $user[$field_disabled];
 } else {
   /* This is a failed attempt */
-  $userid   = $_REQUEST[$field_userid];
+  $ftpname   = $_REQUEST[$field_ftpname];
   $uid      = $_REQUEST[$field_uid];
   $ugid     = $_REQUEST[$field_ugid];
   $ad_gid   = $_REQUEST[$field_ad_gid];

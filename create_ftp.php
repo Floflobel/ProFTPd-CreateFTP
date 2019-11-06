@@ -24,7 +24,7 @@ $field_passwd   = $cfg['field_passwd'];
 $field_path	= $cfg['field_path'];
 $field_shell    = $cfg['field_shell'];
 
-$passwd   = $ac->generate_random_string((int) $cfg['default_passwd_length']);;
+$passwd = $ac->generate_random_string((int) $cfg['default_passwd_length']);
 /* Data validation */
 if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "create") {
   $errors = array();
