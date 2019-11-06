@@ -263,9 +263,7 @@ include ("includes/header.php");
             <label for="<?php echo $field_ugid; ?>" class="col-sm-4 control-label">Main group</label>
             <div class="controls col-sm-8">
               <select class="form-control multiselect" id="<?php echo $field_ugid; ?>" name="<?php echo $field_ugid; ?>" required>
-              <?php reset ($groups); while (list($g_gid, $g_group) = each($groups)) { ?>
-                <option value="<?php echo $g_gid; ?>" <?php if ($ugid == $g_gid) { echo 'selected="selected"'; } ?>><?php echo $g_group; ?></option>
-              <?php } ?>
+              <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" placeholder="Change password" readonly />
               </select>
             </div>
           </div>
@@ -273,7 +271,7 @@ include ("includes/header.php");
           <div class="form-group">
             <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password</label>
             <div class="controls col-sm-8">
-              <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" placeholder="Change password" />
+              <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" placeholder="Change password" readonly />
               <p class="help-block"><small>Minimum length <?php echo $cfg['min_passwd_length']; ?> characters.</small></p>
             </div>
           </div>
