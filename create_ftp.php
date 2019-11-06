@@ -66,7 +66,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
                       $field_shell    => $cfg['default_shell']);
     if ($ac->add_user($userdata)) {
       $infomsg = 'FTP "'.$_REQUEST[$field_ftpname].'" created successfully.';
-      header('Location: ftp_list.php?create_username=' . $_REQUEST[$field_ftpname] . '&create_password='. $_REQUEST[$field_passwd]);
+      header('Location: ftp_list.php?create_ftpname=' . $_REQUEST[$field_ftpname] . '&create_password='. $_REQUEST[$field_passwd]);
     } else {
       $errormsg = 'FTP "'.$_REQUEST[$field_ftpname].'" creation failed; check log files.';
     }

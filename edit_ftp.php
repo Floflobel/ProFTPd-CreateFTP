@@ -92,7 +92,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
   if (empty($errormsg)) {
     /* update additional groups */
     $infomsg = 'User "'.$_REQUEST[$field_ftpname].'" updated successfully.';
-    header('Location: ftp_list.php?update_username=' . $_REQUEST[$field_ftpname] . '&update_password='. $_REQUEST[$field_passwd]);
+    header('Location: ftp_list.php?update_ftpname=' . $_REQUEST[$field_ftpname] . '&update_password='. $_REQUEST[$field_passwd]);
   }
 }
 
