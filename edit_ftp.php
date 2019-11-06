@@ -85,7 +85,6 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     } else {
       /* update user data */
       $user = $ac->get_user_by_id($id);
-      header('Location: ftp_list.php?password='.$_REQUEST[$field_passwd]);
     }
   } else {
     $errormsg = implode($errors, "<br />\n");
@@ -93,6 +92,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
   if (empty($errormsg)) {
     /* update additional groups */
     $infomsg = 'User "'.$_REQUEST[$field_ftpname].'" updated successfully.';
+    header('Location: ftp_list.php?update_password='.$_REQUEST[$field_passwd]);
   }
 }
 
