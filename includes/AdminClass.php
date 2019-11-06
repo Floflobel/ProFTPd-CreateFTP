@@ -552,17 +552,7 @@ class AdminClass {
      */
     function update_user($userdata) {
         $field_id       = $this->config['field_id'];
-        $field_ftpname   = $this->config['field_ftpname'];
-        $field_uid      = $this->config['field_uid'];
-        $field_ugid     = $this->config['field_ugid'];
         $field_passwd   = $this->config['field_passwd'];
-        $field_path  = $this->config['field_path'];
-        $field_shell    = $this->config['field_shell'];
-        $field_name     = $this->config['field_name'];
-        $field_company  = $this->config['field_company'];
-        $field_email    = $this->config['field_email'];
-        $field_comment  = $this->config['field_comment'];
-        $field_disabled = $this->config['field_disabled'];
         $field_create_date = $this->config['field_create_date'];
         $passwd_encryption = $this->config['passwd_encryption'];
 
