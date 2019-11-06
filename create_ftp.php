@@ -48,9 +48,9 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     array_push($errors, 'Invalid UID; UID must be at least ' . $cfg['min_uid'] . '.');
   }
   /* password length validation */
-  if (strlen($_REQUEST[$field_passwd]) < $cfg['min_passwd_length']) {
-    array_push($errors, 'Password: '.$_REQUEST[$field_passwd].' is too short; minimum length is '.$cfg['min_passwd_length'].' characters.');
-  }
+#  if (strlen($_REQUEST[$field_passwd]) < $cfg['min_passwd_length']) {
+#    array_push($errors, 'Password: '.$_REQUEST[$field_passwd].' is too short; minimum length is '.$cfg['min_passwd_length'].' characters.');
+#  }
   /* shell validation */
   if (strlen($cfg['default_shell']) <= 1) {
     array_push($errors, 'Invalid shell; shell cannot be empty.');
@@ -65,7 +65,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     $userdata = array($field_uid      => $cfg['default_uid'],
 		      $field_login    => $_SERVER['PHP_AUTH_USER'], 
                       $field_ftpname   => $_REQUEST[$field_ftpname],
-                      $field_passwd   => $_REQUEST[$field_passwd],
+                      $field_passwd   => $passwd,
                       $field_path  => $cfg['default_path'] . $_REQUEST[$field_ftpname],
                       $field_shell    => $cfg['default_shell']);
     if ($ac->add_user($userdata)) {
