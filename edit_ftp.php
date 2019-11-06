@@ -85,7 +85,10 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     } else {
       /* update user data */
       $user = $ac->get_user_by_id($id);
-      header('Location: ftp_list.php?password=' . $_REQUEST[$field_passwd]);
+      session_start()
+      $update_password = $_REQUEST[$field_passwd];
+      $_SESSION['update_password'] = $update_password
+      header('Location: ftp_list.php?password=');
     }
   } else {
     $errormsg = implode($errors, "<br />\n");
