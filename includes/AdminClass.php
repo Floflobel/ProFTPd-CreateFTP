@@ -586,19 +586,9 @@ class AdminClass {
           $passwd_query = sprintf($passwd_format, $field_passwd, $passwd);
         }
 
-        $format = 'UPDATE %s SET %s %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s" WHERE %s="%s"';
+        $format = 'UPDATE %s SET %s %s="%s" WHERE %s="%s"';
         $query = sprintf($format, $this->config['table_users'],
                                   $passwd_query,
-                                  $field_ftpname,   $userdata[$field_ftpname],
-                                  $field_uid,      $userdata[$field_uid],
-                                  $field_ugid,     $userdata[$field_ugid],
-                                  $field_path,  $userdata[$field_path],
-                                  $field_shell,    $userdata[$field_shell],
-                                  $field_name,     $userdata[$field_name],
-                                  $field_company,  $userdata[$field_company],
-                                  $field_email,    $userdata[$field_email],
-                                  $field_comment,  $userdata[$field_comment],
-                                  $field_disabled, $userdata[$field_disabled],
                                   $field_id,       $userdata[$field_id]);
         $result = $this->dbConn->query($query);
         return $result;

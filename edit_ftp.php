@@ -76,23 +76,10 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
   if (strlen($user[$field_shell]) <= 1) {
     array_push($errors, 'Invalid shell; shell cannot be empty.');
   }
-  /* user name uniqueness validation */
-  if ($ftpname != $_REQUEST[$field_ftpname] && $ac->check_username($_REQUEST[$field_ftpname])) {
-    array_push($errors, 'User name already exists; name must be unique.');
-  }
   if (count($errors) == 0) {
     /* update user */
     $userdata = array($field_id       => $_REQUEST[$field_id],
-                      $field_ftpname   => $user[$field_ftpname],
-                      $field_uid      => $user[$field_uid],
                       $field_passwd   => $_REQUEST[$field_passwd],
-                      $field_path  => $cfg['default_path'] . "/" . $_REQUEST[$field_ftpname],
-                      $field_shell    => $user[$field_shell],
-                      $field_name     => $_REQUEST[$field_name],
-                      $field_email    => $_REQUEST[$field_email],
-                      $field_company  => $_REQUEST[$field_company],
-                      $field_comment  => $_REQUEST[$field_comment],
-                      $field_disabled => $disabled);
     if (!$ac->update_user($userdata)) {
       $errormsg = 'User "'.$_REQUEST[$field_ftpname].'" update failed; check log files.';
     } else {
