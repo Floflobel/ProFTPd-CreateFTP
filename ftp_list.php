@@ -75,10 +75,10 @@ include ("includes/header.php");
 <?php include ("includes/messages.php"); ?>
 
 <?php 
-  $update_password = $_SESSION["password"];
-  if (!empty($update_password)) {
+  $update_password = $_GET["password"];
+#  if (!empty($update_password)) {
     $infomsg = 'The FTP password has been updated. 	Name of the FTP: 	Password:' . $update_password;
-  }
+#  }
 ?>
 
 <?php if(!is_array($all_users)) { ?>
