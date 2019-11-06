@@ -150,6 +150,7 @@ include ("includes/header.php");
                     <td class="pull-middle hidden-xs"><?php echo sprintf("%2.1f", $user[$field_bytes_out_used] / 1048576); ?></td>
                     <td class="pull-middle hidden-xs"><?php echo $user[$field_files_in_used]; ?></td>
                     <td class="pull-middle hidden-xs"><?php echo $user[$field_files_out_used]; ?></td>
+                    <td class="pull-middle"><?php echo $user[$field_login]; ?></td>
                     <td class="pull-middle hidden-xs hidden-sm hidden-md"><?php echo $user[$field_create_date]; ?></td>
                     <td class="pull-middle">
                       <div class="btn-toolbar pull-right" role="toolbar">
