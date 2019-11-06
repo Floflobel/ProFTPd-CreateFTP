@@ -86,7 +86,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
                       $field_uid      => $user[$field_uid],
                       $field_ugid     => $_REQUEST[$field_ugid],
                       $field_passwd   => $_REQUEST[$field_passwd],
-                      $field_homedir  => $cfg['default_homedir'] . $name_group . "/" . $_REQUEST[$field_ftpname],
+                      $field_path  => $cfg['default_path'] . "/" . $_REQUEST[$field_ftpname],
                       $field_shell    => $user[$field_shell],
                       $field_name     => $_REQUEST[$field_name],
                       $field_email    => $_REQUEST[$field_email],
@@ -114,7 +114,7 @@ if (empty($errormsg)) {
   $uid      = $user[$field_uid];
   $ugid     = $user[$field_ugid];
   $passwd   = '';
-  $homedir  = substr($user[$field_homedir], strlen($cfg['default_homedir']));
+  $path  = substr($user[$field_path], strlen($cfg['default_path']));
   $shell    = $user[$field_shell];
   $name     = $user[$field_name];
   $email    = $user[$field_email];
@@ -128,7 +128,7 @@ if (empty($errormsg)) {
   $ugid     = $_REQUEST[$field_ugid];
   $ad_gid   = $_REQUEST[$field_ad_gid];
   $passwd   = $_REQUEST[$field_passwd];
-  $homedir  = $_REQUEST[$field_homedir];
+  $path  = $_REQUEST[$field_path];
   $shell    = $_REQUEST[$field_shell];
   $name     = $_REQUEST[$field_name];
   $email    = $_REQUEST[$field_email];
