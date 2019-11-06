@@ -39,6 +39,8 @@ $field_bytes_out_used = $cfg['field_bytes_out_used'];
 $field_files_in_used  = $cfg['field_files_in_used'];
 $field_files_out_used = $cfg['field_files_out_used'];
 
+$passwd   = $ac->generate_random_string((int) $cfg['default_passwd_length']);;
+
 if (empty($_REQUEST[$field_id])) {
   header("Location: ftp_list.php");
   die();
@@ -260,25 +262,24 @@ include ("includes/header.php");
         <form role="form" class="form-horizontal" method="post" data-toggle="validator">
           <!-- FTP Name -->
           <div class="form-group">
-            <label for="<?php echo $field_ugid; ?>" class="col-sm-4 control-label">Main group</label>
+            <label for="<?php echo $field_ftpname; ?>" class="col-sm-4 control-label">FTP Name</label>
             <div class="controls col-sm-8">
-              <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" placeholder="Change password" readonly />
+              <input type="text" class="form-control" id="<?php echo $field_ftpname; ?>" name="<?php echo $field_ftpname; ?>" value="<?php echo $ftpname; ?>" readonly />
             </div>
           </div>
           <!-- Password -->
           <div class="form-group">
             <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password</label>
             <div class="controls col-sm-8">
-              <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" placeholder="Change password" readonly />
-              <p class="help-block"><small>Minimum length <?php echo $cfg['min_passwd_length']; ?> characters.</small></p>
+              <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" readonly />
             </div>
           </div>
           <!-- Actions -->
           <div class="form-group">
             <div class="col-sm-12">
               <input type="hidden" name="<?php echo $field_id; ?>" value="<?php echo $id; ?>" />
-              <a class="btn btn-danger" href="remove_ftp.php?action=remove&<?php echo $field_id; ?>=<?php echo $id; ?>">Remove user</a>
-              <button type="submit" class="btn btn-primary pull-right" name="action" value="update">Update user</button>
+              <a class="btn btn-danger" href="remove_ftp.php?action=remove&<?php echo $field_id; ?>=<?php echo $id; ?>">Remove FTP</a>
+              <button type="submit" class="btn btn-primary pull-right" name="action" value="update">Change password</button>
             </div>
           </div>
         </form>

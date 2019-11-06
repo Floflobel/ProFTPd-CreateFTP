@@ -125,7 +125,7 @@ include ("includes/header.php");
             <div class="form-group">
               <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd ?>" placeholder="Mandatory password" minlength="<?php echo $cfg['min_passwd_length']; ?>" required readonly />
+                <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd ?>" required readonly />
               </div>
             </div>
             <!-- Actions -->
