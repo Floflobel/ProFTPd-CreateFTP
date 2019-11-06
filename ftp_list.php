@@ -146,7 +146,6 @@ include ("includes/header.php");
               <tbody>
                 <?php foreach ($users as $user) { ?>
                   <tr>
-
                     <td class="pull-middle"><?php echo $user[$field_uid]; ?></td>
                     <td class="pull-middle"><a href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><?php echo $user[$field_userid]; ?></a></td>
                     <td class="pull-middle"><?php echo $all_groups[$user[$field_ugid]]; ?></td>
