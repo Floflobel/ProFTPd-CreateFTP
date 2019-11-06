@@ -75,7 +75,6 @@ include ("includes/header.php");
 <?php include ("includes/messages.php"); ?>
 
 <?php 
-  session_start();
   $update_password = $_SESSION["password"];
   if (!empty($update_password)) {
     $infomsg = 'The FTP password has been updated. 	Name of the FTP: 	Password:' . $update_password;
