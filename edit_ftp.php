@@ -262,9 +262,7 @@ include ("includes/header.php");
           <div class="form-group">
             <label for="<?php echo $field_ugid; ?>" class="col-sm-4 control-label">Main group</label>
             <div class="controls col-sm-8">
-              <select class="form-control multiselect" id="<?php echo $field_ugid; ?>" name="<?php echo $field_ugid; ?>" required>
               <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" placeholder="Change password" readonly />
-              </select>
             </div>
           </div>
           <!-- Password -->
