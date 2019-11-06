@@ -112,26 +112,8 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
 if (empty($errormsg)) {
   /* Default values */
   $uid      = $user[$field_uid];
-  $passwd   = '';
-  $path  = substr($user[$field_path], strlen($cfg['default_path']));
-  $shell    = $user[$field_shell];
-  $name     = $user[$field_name];
-  $email    = $user[$field_email];
-  $company  = $user[$field_company];
-  $comment  = $user[$field_comment];
-  $disabled = $user[$field_disabled];
-} else {
-  /* This is a failed attempt */
-  $ftpname   = $_REQUEST[$field_ftpname];
-  $uid      = $_REQUEST[$field_uid];
-  $passwd   = $_REQUEST[$field_passwd];
-  $path  = $_REQUEST[$field_path];
-  $shell    = $_REQUEST[$field_shell];
-  $name     = $_REQUEST[$field_name];
-  $email    = $_REQUEST[$field_email];
-  $company  = $_REQUEST[$field_company];
-  $comment  = $_REQUEST[$field_comment];
-  $disabled = isset($_REQUEST[$field_disabled]) ? '1' : '0';
+  $ftpname      = $user[$field_ftpname];
+  $passwd   = $passwd;
 }
 
 include ("includes/header.php");
