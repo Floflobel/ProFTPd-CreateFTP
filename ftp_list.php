@@ -39,13 +39,13 @@ $users = array();
 $userfilter = array();
 $ufilter="";
 // see config_example.php on howto activate
-if ($cfg['userid_filter_separator'] != "") {
+if ($cfg['ftpname_filter_separator'] != "") {
   $ufilter = isset($_REQUEST["uf"]) ? $_REQUEST["uf"] : "";
   foreach ($all_users as $user) {
-    $pos = strpos($user[$field_userid], $cfg['userid_filter_separator']);
-    // userid's should not start with a - !
+    $pos = strpos($user[$field_ftpname], $cfg['ftpname_filter_separator']);
+    // ftpname's should not start with a - !
     if ($pos != FALSE) {
-      $prefix = substr($user[$field_userid], 0, $pos);
+      $prefix = substr($user[$field_ftpname], 0, $pos);
       if(@$userfilter[$prefix] == "") {
         $userfilter[$prefix] = $prefix;
       }
@@ -57,11 +57,11 @@ if ($cfg['userid_filter_separator'] != "") {
 if (!empty($all_users)) {
   foreach ($all_users as $user) { 
     if ($ufilter != "") {
-      if ($ufilter == "None" && strpos($user[$field_userid], $cfg['userid_filter_separator'])) {
+      if ($ufilter == "None" && strpos($user[$field_ftpname], $cfg['ftpname_filter_separator'])) {
         // filter is None and user has a prefix
         continue;
       }
-      if ($ufilter != "None" && strncmp($user[$field_userid], $ufilter, strlen($ufilter)) != 0) {
+      if ($ufilter != "None" && strncmp($user[$field_ftpname], $ufilter, strlen($ufilter)) != 0) {
         // filter is something else and user does not have a prefix
       	continue;
       }
