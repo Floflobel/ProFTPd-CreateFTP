@@ -32,8 +32,6 @@ $field_bytes_out_used = $cfg['field_bytes_out_used'];
 $field_files_in_used  = $cfg['field_files_in_used'];
 $field_files_out_used = $cfg['field_files_out_used'];
 
-$all_groups = $ac->get_groups();
-$groups = $ac->parse_groups();
 $all_users = $ac->get_users();
 $users = array();
 
