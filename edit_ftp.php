@@ -85,6 +85,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     } else {
       /* update user data */
       $user = $ac->get_user_by_id($id);
+      header('Location: ftp_list.php');
     }
   } else {
     $errormsg = implode($errors, "<br />\n");
