@@ -578,7 +578,7 @@ class AdminClass {
 
         $format = 'UPDATE %s SET %s %s="%s" WHERE %s="%s"';
         $query = sprintf($format, $this->config['table_users'],
-                                  $passwd_query,
+                                  $passwd_query, $passwd_query, $passwd_query,
                                   $field_id,       $userdata[$field_id]);
         $result = $this->dbConn->query($query);
         return $result;
