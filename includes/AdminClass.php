@@ -84,10 +84,10 @@ class AdminClass {
     }
 
     /**
-     * retrieves groups for each user and populates an array of $data[userid][gid] = groupname
-     * @return Array like $data[userid][gid] = groupname
+     * retrieves groups for each user and populates an array of $data[ftpname][gid] = groupname
+     * @return Array like $data[ftpname][gid] = groupname
      */
-    function parse_groups($userid = false) {
+    function parse_groups($ftpname = false) {
         $format = 'SELECT * FROM %s';
         $query = sprintf($format, $this->config['table_groups']);
         $result = $this->dbConn->get_results($query);
@@ -104,10 +104,10 @@ class AdminClass {
                 }
             }
         }
-        /* no userid provided, return all data */
-        if ($userid === false) return $data;
-        /* if there is data for provided userid, return only that */
-        if (array_key_exists($userid, $data)) return $data[$userid];
+        /* no ftpname provided, return all data */
+        if ($ftpname === false) return $data;
+        /* if there is data for provided ftpname, return only that */
+        if (array_key_exists($ftpname, $data)) return $data[$ftpname];
         /* return nothing otherwise */
         return array();
     }
@@ -223,12 +223,12 @@ class AdminClass {
 
     /**
      * Checks if the given username is already in the database
-     * @param String $userid
+     * @param String $ftpname
      * @return boolean true if username exists, false if not
      */
-    function check_username($userid) {
+    function check_username($ftpname) {
         $format = 'SELECT 1 FROM %s WHERE %s="%s"';
-        $query = sprintf($format, $this->config['table_users'], $this->config['field_userid'], $userid);
+        $query = sprintf($format, $this->config['table_users'], $this->config['field_ftpname'], $ftpname);
         $result = $this->dbConn->get_row($query);
         if (is_object($result)) return true;
         return false;
@@ -287,22 +287,17 @@ class AdminClass {
      * @return Boolean true on success, false on failure
      */
     function add_user($userdata) {
-        $field_userid   = $this->config['field_userid'];
+        $field_ftpname   = $this->config['field_ftpname'];
         $field_uid      = $this->config['field_uid'];
-        $field_ugid     = $this->config['field_ugid'];
+        $field_login      = $this->config['field_login'];
         $field_passwd   = $this->config['field_passwd'];
-        $field_homedir  = $this->config['field_homedir'];
+        $field_path  = $this->config['field_path'];
         $field_shell    = $this->config['field_shell'];
-        $field_name     = $this->config['field_name'];
-        $field_company  = $this->config['field_company'];
-        $field_email    = $this->config['field_email'];
-        $field_comment  = $this->config['field_comment'];
-        $field_disabled = $this->config['field_disabled'];
         $field_last_modified = $this->config['field_last_modified'];
         $passwd_encryption = $this->config['passwd_encryption'];
         $passwd = "";
         if ($passwd_encryption == 'pbkdf2') {
-          $passwd = hash_pbkdf2("sha1", $userdata[$field_passwd], $userdata[$field_userid], 5000, 40);
+          $passwd = hash_pbkdf2("sha1", $userdata[$field_passwd], $userdata[$field_ftpname], 5000, 40);
           $passwd = '"'.$passwd.'"';
         } else if ($passwd_encryption == 'crypt') {
           $passwd = unix_crypt($userdata[$field_passwd]);
@@ -313,31 +308,21 @@ class AdminClass {
         } else {
           $passwd = $passwd_encryption.'("'.$userdata[$field_passwd].'")';
         }
-        $format = 'INSERT INTO %s (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) VALUES ("%s","%s","%s",%s,"%s","%s","%s","%s","%s","%s","%s","%s")';
+        $format = 'INSERT INTO %s (%s,%s,%s,%s,%s,%s,%s) VALUES ("%s","%s","%s",%s,"%s","%s","%s")';
         $query = sprintf($format, $this->config['table_users'],
-                                  $field_userid,
+                                  $field_login,
+                                  $field_ftpname,
                                   $field_uid,
-                                  $field_ugid,
                                   $field_passwd,
-                                  $field_homedir,
+                                  $field_path,
                                   $field_shell,
-                                  $field_name,
-                                  $field_company,
-                                  $field_email,
-                                  $field_comment,
-                                  $field_disabled,
                                   $field_last_modified,
-                                  $userdata[$field_userid],
+                                  $userdata[$field_login],
+                                  $userdata[$field_ftpname],
                                   $userdata[$field_uid],
-                                  $userdata[$field_ugid],
                                   $passwd,
-                                  $userdata[$field_homedir],
+                                  $userdata[$field_path],
                                   $userdata[$field_shell],
-                                  $userdata[$field_name],
-                                  $userdata[$field_company],
-                                  $userdata[$field_email],
-                                  $userdata[$field_comment],
-                                  $userdata[$field_disabled],
                                   date('Y-m-d H:i:s'));
         $result = $this->dbConn->query($query);
         return $result;
@@ -358,14 +343,14 @@ class AdminClass {
     }
 
     /**
-     * retrieve a user by userid
-     * @param String $userid
+     * retrieve a user by ftpname
+     * @param String $ftpname
      * @return Array
      */
-    function get_user_by_userid($userid) {
-        if (empty($userid)) return false;
+    function get_user_by_ftpname($ftpname) {
+        if (empty($ftpname)) return false;
         $format = 'SELECT * FROM %s WHERE %s="%s"';
-        $query = sprintf($format, $this->config['table_users'], $this->config['field_userid'], $userid);
+        $query = sprintf($format, $this->config['table_users'], $this->config['field_ftpname'], $ftpname);
         $result = $this->dbConn->get_row($query, ARRAY_A);
         if (!$result) return false;
         return $result;
@@ -387,24 +372,24 @@ class AdminClass {
 
     /**
      * retrieves user from database with given maingroup
-     * and populates an array of $data[id] = userid
+     * and populates an array of $data[id] = ftpname
      * @param Integer $gid
-     * @return Array form is $data[id] = userid
+     * @return Array form is $data[id] = ftpname
      */
     function get_users_by_gid($gid) {
         if (empty($gid)) return false;
         $format = 'SELECT %s, %s FROM %s WHERE %s="%s"';
-        $query = sprintf($format, $this->config['field_id'], $this->config['field_userid'], $this->config['table_users'], $this->config['field_ugid'], $gid);
+        $query = sprintf($format, $this->config['field_id'], $this->config['field_ftpname'], $this->config['table_users'], $this->config['field_ugid'], $gid);
         $result = $this->dbConn->get_results($query);
         if (!$result) return false;
 
         $field_id = $this->config['field_id'];
-        $field_userid = $this->config['field_userid'];
+        $field_ftpname = $this->config['field_ftpname'];
         $field_members = $this->config['field_members'];
 
         $data = array();
         foreach ($result as $user) {
-            $data[$user->$field_id] = $user->$field_userid;
+            $data[$user->$field_id] = $user->$field_ftpname;
         }
         if (count($data) == 0) return false;
         return $data;
@@ -426,9 +411,9 @@ class AdminClass {
     }
 
     /**
-     * retrieves members from group and populates an array of $data[id] = userid
+     * retrieves members from group and populates an array of $data[id] = ftpname
      * @param Integer $gid
-     * @return Array form is $data[id] = userid
+     * @return Array form is $data[id] = ftpname
      */
     function get_add_users_by_gid($gid) {
         if (empty($gid)) return false;
@@ -436,15 +421,15 @@ class AdminClass {
         if (!$group) return false;
 
         $field_id = $this->config['field_id'];
-        $field_userid = $this->config['field_userid'];
+        $field_ftpname = $this->config['field_ftpname'];
         $field_members = $this->config['field_members'];
 
-        $userids = explode(",", $group[$field_members]);
+        $ftpnames = explode(",", $group[$field_members]);
         $data = array();
-        foreach ($userids as $userid) {
-            $user = $this->get_user_by_userid($userid);
+        foreach ($ftpnames as $ftpname) {
+            $user = $this->get_user_by_ftpname($ftpname);
             if (!$user) continue;
-            $data[$user[$field_id]] = $user[$field_userid];
+            $data[$user[$field_id]] = $user[$field_ftpname];
         }
         if (count($data) == 0) return false;
         return $data;
@@ -462,38 +447,38 @@ class AdminClass {
         if (!$group) return false;
 
         $field_id = $this->config['field_id'];
-        $field_userid = $this->config['field_userid'];
+        $field_ftpname = $this->config['field_ftpname'];
         $field_members = $this->config['field_members'];
 
-        $userids = explode(",", $group[$field_members]);
+        $ftpnames = explode(",", $group[$field_members]);
         $data = array();
-        foreach ($userids as $userid) {
-            $user = $this->get_user_by_userid($userid);
+        foreach ($ftpnames as $ftpname) {
+            $user = $this->get_user_by_ftpname($ftpname);
             if (!$user) continue;
-            $data[$user[$field_id]] = $user[$field_userid];
+            $data[$user[$field_id]] = $user[$field_ftpname];
         }
         return count($data);
     }
 
     /**
      * Adds a user to a group using the groupid
-     * @param Integer $userid
+     * @param Integer $ftpname
      * @param Integer $gid
      * @return boolean false on error
      */
-    function add_user_to_group($userid, $gid) {
-        if (empty($userid) || empty($gid)) return false;
+    function add_user_to_group($ftpname, $gid) {
+        if (empty($ftpname) || empty($gid)) return false;
         $format = 'SELECT %s FROM %s WHERE %s="%s"';
         $query = sprintf($format, $this->config['field_members'], $this->config['table_groups'], $this->config['field_gid'], $gid);
         $result = $this->dbConn->get_var($query);
         if ($result != "") {
-            if(strpos($result, $userid) !== false) {
+            if(strpos($result, $ftpname) !== false) {
                 return true;
             } else {
-                $members = $result.','.$userid;
+                $members = $result.','.$ftpname;
             }
         } else {
-            $members = $userid;
+            $members = $ftpname;
         }
 
         $format = 'UPDATE %s SET %s="%s" WHERE %s="%s"';
@@ -505,20 +490,20 @@ class AdminClass {
 
     /**
      * removes a user from a given group using the groupid
-     * @param Integer $userid
+     * @param Integer $ftpname
      * @param Integer $gid
      * @return boolean false on error
      */
-    function remove_user_from_group($userid, $gid) {
-        if (empty($userid) || empty($gid)) return false;
+    function remove_user_from_group($ftpname, $gid) {
+        if (empty($ftpname) || empty($gid)) return false;
         $format = 'SELECT %s FROM %s WHERE %s="%s"';
         $query = sprintf($format, $this->config['field_members'], $this->config['table_groups'], $this->config['field_gid'], $gid);
         $result = $this->dbConn->get_var($query);
-        if(strpos($result, $userid) === false) {
+        if(strpos($result, $ftpname) === false) {
             return true;
         }
         $members_array = explode(",", $result);
-        $members_new_array = array_diff($members_array, array("$userid", ""));
+        $members_new_array = array_diff($members_array, array("$ftpname", ""));
         if (is_array($members_new_array)) {
             $members_new = implode(",", $members_new_array);
         } else {
@@ -567,11 +552,11 @@ class AdminClass {
      */
     function update_user($userdata) {
         $field_id       = $this->config['field_id'];
-        $field_userid   = $this->config['field_userid'];
+        $field_ftpname   = $this->config['field_ftpname'];
         $field_uid      = $this->config['field_uid'];
         $field_ugid     = $this->config['field_ugid'];
         $field_passwd   = $this->config['field_passwd'];
-        $field_homedir  = $this->config['field_homedir'];
+        $field_path  = $this->config['field_path'];
         $field_shell    = $this->config['field_shell'];
         $field_name     = $this->config['field_name'];
         $field_company  = $this->config['field_company'];
@@ -585,7 +570,7 @@ class AdminClass {
         if (strlen($userdata[$field_passwd]) > 0) {
           $passwd_format = '';
           if ($passwd_encryption == 'pbkdf2') {
-            $passwd = hash_pbkdf2("sha1", $userdata[$field_passwd], $userdata[$field_userid], 5000, 40);
+            $passwd = hash_pbkdf2("sha1", $userdata[$field_passwd], $userdata[$field_ftpname], 5000, 40);
             $passwd_format = ' %s="%s", ';
           } else if ($passwd_encryption == 'crypt') {
             $passwd = unix_crypt($userdata[$field_passwd]);
@@ -604,10 +589,10 @@ class AdminClass {
         $format = 'UPDATE %s SET %s %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s" WHERE %s="%s"';
         $query = sprintf($format, $this->config['table_users'],
                                   $passwd_query,
-                                  $field_userid,   $userdata[$field_userid],
+                                  $field_ftpname,   $userdata[$field_ftpname],
                                   $field_uid,      $userdata[$field_uid],
                                   $field_ugid,     $userdata[$field_ugid],
-                                  $field_homedir,  $userdata[$field_homedir],
+                                  $field_path,  $userdata[$field_path],
                                   $field_shell,    $userdata[$field_shell],
                                   $field_name,     $userdata[$field_name],
                                   $field_company,  $userdata[$field_company],
