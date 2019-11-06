@@ -38,7 +38,7 @@ $users = array();
 /* return FTP name and password */
 $update_password = $_GET["password"];
   if (!empty($update_password)) {
-    $infomsg = 'The FTP password has been updated. 	Name of the FTP: 	Password:' . $update_password;
+    $infomsg = 'The FTP password has been updated. \n Name of the FTP: \n Password:' . $update_password;
   }
 
 /* parse filter  */
