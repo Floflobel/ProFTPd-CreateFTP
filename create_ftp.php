@@ -48,9 +48,9 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     array_push($errors, 'Invalid UID; UID must be at least ' . $cfg['min_uid'] . '.');
   }
   /* password length validation */
-#  if (strlen($_REQUEST[$field_passwd]) < $cfg['min_passwd_length']) {
-#    array_push($errors, 'Password: '.$_REQUEST[$field_passwd].' is too short; minimum length is '.$cfg['min_passwd_length'].' characters.');
-#  }
+  if (strlen($_REQUEST[$field_passwd]) < $cfg['min_passwd_length']) {
+    array_push($errors, 'Password: '.$passwd.' is too short; minimum length is '.$cfg['min_passwd_length'].' characters.');
+  }
   /* shell validation */
   if (strlen($cfg['default_shell']) <= 1) {
     array_push($errors, 'Invalid shell; shell cannot be empty.');
