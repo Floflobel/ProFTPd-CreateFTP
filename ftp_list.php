@@ -140,7 +140,6 @@ include ("includes/header.php");
                 <th class="hidden-xs"><span class="glyphicon glyphicon-file" aria-hidden="true" title="Downloaded files"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" title="Downloaded files"></th>
                 <th><span class="glyphicon glyphicon-user" aria-hidden="true" title="Login"></th>
                 <th class="hidden-xs hidden-sm hidden-md"><span class="glyphicon glyphicon-time" aria-hidden="true" title="Create date"></th>
-                <th><span class="glyphicon glyphicon-lock" aria-hidden="true" title="Suspended"></th>
                 <th data-defaultsort="disabled"></th>
               </thead>
               <tbody>
