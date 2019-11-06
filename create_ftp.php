@@ -47,10 +47,6 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
   } else if ($cfg['min_uid'] != -1 && $cfg['default_uid'] < $cfg['min_uid']) {
     array_push($errors, 'Invalid UID; UID must be at least ' . $cfg['min_uid'] . '.');
   }
-  /* password length validation */
-  if (strlen($_REQUEST[$field_passwd]) < $cfg['min_passwd_length']) {
-    array_push($errors, 'Password: '.$passwd.' is too short; minimum length is '.$cfg['min_passwd_length'].' characters.');
-  }
   /* shell validation */
   if (strlen($cfg['default_shell']) <= 1) {
     array_push($errors, 'Invalid shell; shell cannot be empty.');
@@ -84,7 +80,7 @@ if (isset($errormsg)) {
   $uid      = $cfg['default_uid'];
   $login  = $_REQUEST[$field_login];
   $ftpname   = $_REQUEST[$field_ftpname];
-  $passwd   = $_REQUEST[$field_passwd];
+  $passwd   = $passwd;
   $path  = $cfg['default_path'];
   $shell    = $cfg['default_shell'];
 } else {
@@ -100,7 +96,7 @@ if (isset($errormsg)) {
   } else {
     $shell  = $cfg['default_shell'];
   }
-  $passwd   = $ac->generate_random_string((int) $cfg['default_passwd_length']);
+  $passwd   = $passwd;
   $path  = $cfg['default_path'];
 }
 
