@@ -53,7 +53,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
   }
   /* FTP name uniqueness validation */
   if ($ac->check_username($_REQUEST[$field_ftpname])) {
-    array_push($errors, 'User name already exists; name must be unique.');
+    array_push($errors, 'FTP name already exists; name must be unique.');
   }
   /* data validation passed */
   if (count($errors) == 0) {
@@ -65,9 +65,9 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
                       $field_path  => $cfg['default_path'] . '/' . $_REQUEST[$field_ftpname],
                       $field_shell    => $cfg['default_shell']);
     if ($ac->add_user($userdata)) {
-      $infomsg = 'User "'.$_REQUEST[$field_ftpname].'" created successfully.';
+      $infomsg = 'FTP "'.$_REQUEST[$field_ftpname].'" created successfully.';
     } else {
-      $errormsg = 'User "'.$_REQUEST[$field_ftpname].'" creation failed; check log files.';
+      $errormsg = 'FTP "'.$_REQUEST[$field_ftpname].'" creation failed; check log files.';
     }
   } else {
     $errormsg = implode($errors, "<br />\n");
@@ -125,7 +125,7 @@ include ("includes/header.php");
             <div class="form-group">
               <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd ?>" placeholder="Mandatory password" minlength="<?php echo $cfg['min_passwd_length']; ?>" required disabled />
+                <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd ?>" placeholder="Mandatory password" minlength="<?php echo $cfg['min_passwd_length']; ?>" required readonly />
               </div>
             </div>
             <!-- Actions -->
