@@ -561,17 +561,17 @@ class AdminClass {
           $passwd_format = '';
           if ($passwd_encryption == 'pbkdf2') {
             $passwd = hash_pbkdf2("sha1", $userdata[$field_passwd], $userdata[$field_ftpname], 5000, 40);
-            $passwd_format = ' %s="%s", ';
+            $passwd_format = ' %s="%s" ';
           } else if ($passwd_encryption == 'crypt') {
             $passwd = unix_crypt($userdata[$field_passwd]);
-            $passwd_format = ' %s="%s", ';
+            $passwd_format = ' %s="%s" ';
           } else if (strpos($passwd_encryption, "OpenSSL:") === 0) {
             $passwd_digest = substr($passwd_encryption, strpos($passwd_encryption, ':')+1);
             $passwd = 'CONCAT("{'.$passwd_digest.'}",TO_BASE64(UNHEX('.$passwd_digest.'("'.$userdata[$field_passwd].'"))))';
-            $passwd_format = ' %s=%s, ';
+            $passwd_format = ' %s=%s ';
           } else {
             $passwd = $passwd_encryption.'("'.$userdata[$field_passwd].'")';
-            $passwd_format = ' %s=%s, ';
+            $passwd_format = ' %s=%s ';
           }
           $passwd_query = sprintf($passwd_format, $field_passwd, $passwd);
         }
