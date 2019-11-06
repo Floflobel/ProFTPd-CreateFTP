@@ -580,7 +580,6 @@ class AdminClass {
         $query = sprintf($format, $this->config['table_users'],
                                   $passwd_query,
                                   $field_id,       $userdata[$field_id]);
-	print_r($query);
         $result = $this->dbConn->query($query);
         return $result;
     }
