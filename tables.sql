@@ -16,7 +16,7 @@ CREATE TABLE `users` (
   `files_out_used` bigint(20) unsigned NOT NULL default '0',
   `login_count` int(11) unsigned NOT NULL default '0',
   `last_login` datetime NOT NULL default '0000-00-00 00:00:00',
-  `last_modified` datetime NOT NULL default '0000-00-00 00:00:00',
+  `create_date` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `ftpname` (`ftpname`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='ProFTPd FTP table';

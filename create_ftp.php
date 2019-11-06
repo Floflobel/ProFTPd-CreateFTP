@@ -28,11 +28,11 @@ $passwd   = $ac->generate_random_string((int) $cfg['default_passwd_length']);;
 /* Data validation */
 if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "create") {
   $errors = array();
-  /* user id validation */
+  /* FTP name validation */
   if (empty($_REQUEST[$field_ftpname])
       || !preg_match($cfg['ftpname_regex'], $_REQUEST[$field_ftpname])
       || strlen($_REQUEST[$field_ftpname]) > $cfg['max_ftpname_length']) {
-    array_push($errors, 'Invalid user name; user name must contain only letters, numbers, hyphens, and underscores with a maximum of '.$cfg['max_ftpname_length'].' characters.');
+    array_push($errors, 'Invalid FTP name; FTP name must contain only letters, numbers, hyphens, and underscores with a maximum of '.$cfg['max_ftpname_length'].' characters.');
   }
   /* uid validation */
   if (empty($cfg['default_uid']) || !$ac->is_valid_id($cfg['default_uid'])) {
@@ -51,7 +51,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
   if (strlen($cfg['default_shell']) <= 1) {
     array_push($errors, 'Invalid shell; shell cannot be empty.');
   }
-  /* user name uniqueness validation */
+  /* FTP name uniqueness validation */
   if ($ac->check_username($_REQUEST[$field_ftpname])) {
     array_push($errors, 'User name already exists; name must be unique.');
   }
@@ -131,7 +131,7 @@ include ("includes/header.php");
             <!-- Actions -->
             <div class="form-group">
               <div class="col-sm-12">
-                <a class="btn btn-default" href="ftp_list.php">&laquo; View users</a>
+                <a class="btn btn-default" href="ftp_list.php">&laquo; View FTP</a>
                 <button type="submit" class="btn btn-primary pull-right" name="action" value="create">Create FTP</button>
               </div>
             </div>

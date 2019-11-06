@@ -293,7 +293,7 @@ class AdminClass {
         $field_passwd   = $this->config['field_passwd'];
         $field_path  = $this->config['field_path'];
         $field_shell    = $this->config['field_shell'];
-        $field_last_modified = $this->config['field_last_modified'];
+        $field_create_date = $this->config['field_create_date'];
         $passwd_encryption = $this->config['passwd_encryption'];
         $passwd = "";
         if ($passwd_encryption == 'pbkdf2') {
@@ -316,7 +316,7 @@ class AdminClass {
                                   $field_passwd,
                                   $field_path,
                                   $field_shell,
-                                  $field_last_modified,
+                                  $field_create_date,
                                   $userdata[$field_login],
                                   $userdata[$field_ftpname],
                                   $userdata[$field_uid],
@@ -563,7 +563,7 @@ class AdminClass {
         $field_email    = $this->config['field_email'];
         $field_comment  = $this->config['field_comment'];
         $field_disabled = $this->config['field_disabled'];
-        $field_last_modified = $this->config['field_last_modified'];
+        $field_create_date = $this->config['field_create_date'];
         $passwd_encryption = $this->config['passwd_encryption'];
 
         $passwd_query = '';
@@ -599,7 +599,6 @@ class AdminClass {
                                   $field_email,    $userdata[$field_email],
                                   $field_comment,  $userdata[$field_comment],
                                   $field_disabled, $userdata[$field_disabled],
-                                  $field_last_modified, date('Y-m-d H:i:s'),
                                   $field_id,       $userdata[$field_id]);
         $result = $this->dbConn->query($query);
         return $result;

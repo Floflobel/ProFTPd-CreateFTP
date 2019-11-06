@@ -33,7 +33,7 @@ $field_disabled = $cfg['field_disabled'];
 
 $field_login_count    = $cfg['field_login_count'];
 $field_last_login     = $cfg['field_last_login'];
-$field_last_modified  = $cfg['field_last_modified'];
+$field_create_date  = $cfg['field_create_date'];
 $field_bytes_in_used  = $cfg['field_bytes_in_used'];
 $field_bytes_out_used = $cfg['field_bytes_out_used'];
 $field_files_in_used  = $cfg['field_files_in_used'];
@@ -209,9 +209,9 @@ include ("includes/header.php");
           </div>
           <!-- Last modified (readonly) -->
           <div class="form-group">
-            <label for="<?php echo $field_last_modified; ?>" class="col-sm-4 control-label">Last modified</label>
+            <label for="<?php echo $field_create_date; ?>" class="col-sm-4 control-label">Last modified</label>
             <div class="controls col-sm-8">
-              <input type="text" class="form-control" id="<?php echo $field_last_modified; ?>" name="<?php echo $field_last_modified; ?>" value="<?php echo $user[$field_last_modified]; ?>" readonly />
+              <input type="text" class="form-control" id="<?php echo $field_create_date; ?>" name="<?php echo $field_create_date; ?>" value="<?php echo $user[$field_create_date]; ?>" readonly />
             </div>
           </div>
           <!-- Bytes in (readonly) -->
