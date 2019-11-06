@@ -131,23 +131,22 @@ include ("includes/header.php");
           <div class="form-group">
             <table class="table table-striped table-condensed sortable">
               <thead>
+                <th class="hidden-xs hidden-sm" data-defaultsort="disabled"><span class="glyphicon glyphicon-tags" aria-hidden="true" title="FTP Name"></th>
                 <th>UID</th>
-                <th><span class="glyphicon glyphicon-user" aria-hidden="true" title="User name"></th>
-                <th class="hidden-xs hidden-sm" data-defaultsort="disabled"><span class="glyphicon glyphicon-tags" aria-hidden="true" title="Additional groups"></th>
-                <th class="hidden-xs hidden-sm hidden-md"><span class="glyphicon glyphicon-time" aria-hidden="true" title="Last login"></th>
                 <th class="hidden-xs hidden-sm"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" title="Login count"></th>
                 <th class="hidden-xs"><span class="glyphicon glyphicon-signal" aria-hidden="true" title="Uploaded MBs"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true" title="Uploaded MBs"></th>
                 <th class="hidden-xs"><span class="glyphicon glyphicon-signal" aria-hidden="true" title="Downloaded MBs"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" title="Downloaded MBs"></th>
                 <th class="hidden-xs"><span class="glyphicon glyphicon-file" aria-hidden="true" title="Uploaded files"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true" title="Uploaded files"></th>
                 <th class="hidden-xs"><span class="glyphicon glyphicon-file" aria-hidden="true" title="Downloaded files"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" title="Downloaded files"></th>
-                <th class="hidden-xs hidden-sm"><span class="glyphicon glyphicon-home" aria-hidden="true" title="Home directory"></th>
-                <th class="hidden-xs hidden-sm"><span class="glyphicon glyphicon-envelope" aria-hidden="true" title="E-mail"></th>
+                <th><span class="glyphicon glyphicon-user" aria-hidden="true" title="Login"></th>
+                <th class="hidden-xs hidden-sm hidden-md"><span class="glyphicon glyphicon-time" aria-hidden="true" title="Create date"></th>
                 <th><span class="glyphicon glyphicon-lock" aria-hidden="true" title="Suspended"></th>
                 <th data-defaultsort="disabled"></th>
               </thead>
               <tbody>
                 <?php foreach ($users as $user) { ?>
                   <tr>
+
                     <td class="pull-middle"><?php echo $user[$field_uid]; ?></td>
                     <td class="pull-middle"><a href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><?php echo $user[$field_userid]; ?></a></td>
                     <td class="pull-middle"><?php echo $all_groups[$user[$field_ugid]]; ?></td>
