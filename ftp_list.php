@@ -11,12 +11,6 @@
  *
  */
 
-  $update_password = $_GET["password"];
-  $infomsg = 'toto';
-#  if (!empty($update_password)) {
-#    $infomsg = 'The FTP password has been updated. 	Name of the FTP: 	Password:' . $update_password;
-#  }
-
 include_once ("configs/config.php");
 include_once ("includes/AdminClass.php");
 global $cfg;
@@ -40,6 +34,12 @@ $field_files_out_used = $cfg['field_files_out_used'];
 
 $all_users = $ac->get_users();
 $users = array();
+
+/* return FTP name and password */
+$update_password = $_GET["password"];
+  if (!empty($update_password)) {
+    $infomsg = 'The FTP password has been updated. 	Name of the FTP: 	Password:' . $update_password;
+  }
 
 /* parse filter  */
 $userfilter = array();
