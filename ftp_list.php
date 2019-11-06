@@ -17,19 +17,15 @@ global $cfg;
 
 $ac = new AdminClass($cfg);
 
-$field_userid   = $cfg['field_userid'];
-$field_id       = $cfg['field_id'];
 $field_uid      = $cfg['field_uid'];
-$field_ugid     = $cfg['field_ugid'];
-$field_homedir  = $cfg['field_homedir'];
+$field_login    = $cfg['field_login'];
+$field_ftpname  = $cfg['field_ftpname'];
+$field_passwd   = $cfg['field_passwd'];
+$field_path     = $cfg['field_path'];
 $field_shell    = $cfg['field_shell'];
-$field_name     = $cfg['field_name'];
-$field_company  = $cfg['field_company'];
-$field_email    = $cfg['field_email'];
-$field_disabled = $cfg['field_disabled'];
 
 $field_login_count    = $cfg['field_login_count'];
-$field_last_login     = $cfg['field_last_login'];
+$field_create_date     = $cfg['field_create_date'];
 $field_bytes_in_used  = $cfg['field_bytes_in_used'];
 $field_bytes_out_used = $cfg['field_bytes_out_used'];
 $field_files_in_used  = $cfg['field_files_in_used'];
@@ -145,18 +141,15 @@ include ("includes/header.php");
               <tbody>
                 <?php foreach ($users as $user) { ?>
                   <tr>
+
+                    <td class="pull-middle"><a href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><?php echo $user[$field_ftpname]; ?></a/></td>
                     <td class="pull-middle"><?php echo $user[$field_uid]; ?></td>
-                    <td class="pull-middle"><a href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><?php echo $user[$field_userid]; ?></a></td>
-                    <td class="pull-middle"><?php echo $all_groups[$user[$field_ugid]]; ?></td>
-                    <td class="pull-middle hidden-xs hidden-sm hidden-md"><?php echo $user[$field_last_login]; ?></td>
                     <td class="pull-middle hidden-xs hidden-sm"><?php echo $user[$field_login_count]; ?></td>
                     <td class="pull-middle hidden-xs"><?php echo sprintf("%2.1f", $user[$field_bytes_in_used] / 1048576); ?></td>
                     <td class="pull-middle hidden-xs"><?php echo sprintf("%2.1f", $user[$field_bytes_out_used] / 1048576); ?></td>
                     <td class="pull-middle hidden-xs"><?php echo $user[$field_files_in_used]; ?></td>
                     <td class="pull-middle hidden-xs"><?php echo $user[$field_files_out_used]; ?></td>
-                    <td class="pull-middle hidden-xs hidden-sm"><?php echo $user[$field_homedir]; ?></td>
-                    <td class="pull-middle hidden-xs hidden-sm"><?php echo $user[$field_email]; ?></td>
-                    <td class="pull-middle"><?php echo ($user[$field_disabled] ? 'Yes' : 'No'); ?></td>
+                    <td class="pull-middle hidden-xs hidden-sm hidden-md"><?php echo $user[$field_create_date]; ?></td>
                     <td class="pull-middle">
                       <div class="btn-toolbar pull-right" role="toolbar">
                         <a class="btn-group" role="group" href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
