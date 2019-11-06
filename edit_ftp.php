@@ -182,12 +182,12 @@ include ("includes/header.php");
 <?php include ("includes/messages.php"); ?>
 
 <?php if (is_array($user)) { ?>
-<!-- User metadata panel -->
+<!-- FTP metadata panel -->
 <div class="col-xs-12 col-sm-6">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">
-        <a data-toggle="collapse" href="#userstats" aria-expanded="true" aria-controls="userstats">User statistics</a>
+        <a data-toggle="collapse" href="#userstats" aria-expanded="true" aria-controls="userstats">FTP statistics</a>
       </h3>
     </div>
     <div class="panel-body collapse in" id="userstats" aria-expanded="true">
@@ -207,9 +207,9 @@ include ("includes/header.php");
               <input type="text" class="form-control" id="<?php echo $field_last_login; ?>" name="<?php echo $field_last_login; ?>" value="<?php echo $user[$field_last_login]; ?>" readonly />
             </div>
           </div>
-          <!-- Last modified (readonly) -->
+          <!-- Create date (readonly) -->
           <div class="form-group">
-            <label for="<?php echo $field_create_date; ?>" class="col-sm-4 control-label">Last modified</label>
+            <label for="<?php echo $field_create_date; ?>" class="col-sm-4 control-label">Create date</label>
             <div class="controls col-sm-8">
               <input type="text" class="form-control" id="<?php echo $field_create_date; ?>" name="<?php echo $field_create_date; ?>" value="<?php echo $user[$field_create_date]; ?>" readonly />
             </div>
@@ -252,21 +252,13 @@ include ("includes/header.php");
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">
-        <a data-toggle="collapse" href="#userprops" aria-expanded="true" aria-controls="userprops">User properties</a>
+        <a data-toggle="collapse" href="#userprops" aria-expanded="true" aria-controls="userprops">FTP properties</a>
       </h3>
     </div>
     <div class="panel-body collapse in" id="userprops" aria-expanded="true">
       <div class="col-sm-12">
         <form role="form" class="form-horizontal" method="post" data-toggle="validator">
-          <!-- User name -->
-          <div class="form-group">
-            <label for="<?php echo $field_userid; ?>" class="col-sm-4 control-label">User name</label>
-            <div class="controls col-sm-8">
-              <input type="text" class="form-control" id="<?php echo $field_userid; ?>" name="<?php echo $field_userid; ?>" value="<?php echo $userid; ?>" placeholder="Enter a user name" maxlength="<?php echo $cfg['max_userid_length']; ?>" pattern="<?php echo substr($cfg['userid_regex'], 2, -3); ?>" required />
-              <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_userid_length']; ?> characters.</small></p>
-            </div>
-          </div>
-          <!-- Main group -->
+          <!-- FTP Name -->
           <div class="form-group">
             <label for="<?php echo $field_ugid; ?>" class="col-sm-4 control-label">Main group</label>
             <div class="controls col-sm-8">
@@ -283,45 +275,6 @@ include ("includes/header.php");
             <div class="controls col-sm-8">
               <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" placeholder="Change password" />
               <p class="help-block"><small>Minimum length <?php echo $cfg['min_passwd_length']; ?> characters.</small></p>
-            </div>
-          </div>
-          <!-- Real name -->
-          <div class="form-group">
-            <label for="<?php echo $field_name; ?>" class="col-sm-4 control-label">Name</label>
-            <div class="controls col-sm-8">
-              <input type="text" class="form-control" id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" value="<?php echo $name; ?>" placeholder="Enter the user's real name" />
-            </div>
-          </div>
-          <!-- Email -->
-          <div class="form-group">
-            <label for="<?php echo $field_email; ?>" class="col-sm-4 control-label">E-mail</label>
-            <div class="controls col-sm-8">
-              <input type="email" class="form-control" id="<?php echo $field_email; ?>" name="<?php echo $field_email; ?>" value="<?php echo $email; ?>" placeholder="Enter the user's email" />
-            </div>
-          </div>
-          <!-- Company -->
-          <div class="form-group">
-            <label for="<?php echo $field_company; ?>" class="col-sm-4 control-label">Company</label>
-            <div class="controls col-sm-8">
-              <input type="text" class="form-control" id="<?php echo $field_company; ?>" name="<?php echo $field_company; ?>" value="<?php echo $company; ?>" placeholder="Enter a company or department" />
-            </div>
-          </div>
-          <!-- Comment -->
-          <div class="form-group">
-            <label for="<?php echo $field_comment; ?>" class="col-sm-4 control-label">Comment</label>
-            <div class="controls col-sm-8">
-              <textarea class="form-control" id="<?php echo $field_comment; ?>" name="<?php echo $field_comment; ?>" rows="3" placeholder="Enter a comment or additional information about the user"><?php echo $comment; ?></textarea>
-            </div>
-          </div>
-          <!-- Suspended -->
-          <div class="form-group">
-            <label for="<?php echo $field_disabled; ?>" class="col-sm-4 control-label">Status</label>
-            <div class="controls col-sm-8">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" id="<?php echo $field_disabled; ?>" name="<?php echo $field_disabled; ?>" <?php if ($disabled) { echo 'checked="checked"'; } ?> />Suspended account
-                </label>
-              </div>
             </div>
           </div>
           <!-- Actions -->
