@@ -21,10 +21,10 @@ $field_uid      = $cfg['field_uid'];
 $field_login	= $cfg['field_login'];
 $field_ftpname	= $cfg['field_ftpname'];
 $field_passwd   = $cfg['field_passwd'];
-#$field_passwd   = $ac->generate_random_string((int) $cfg['default_passwd_length']);;
 $field_path	= $cfg['field_path'];
 $field_shell    = $cfg['field_shell'];
 
+$passwd   = $ac->generate_random_string((int) $cfg['default_passwd_length']);;
 /* Data validation */
 if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "create") {
   $errors = array();
@@ -129,7 +129,7 @@ include ("includes/header.php");
             <div class="form-group">
               <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php $ac->generate_random_string((int) $cfg['default_passwd_length']) ?>" placeholder="Mandatory password" minlength="<?php echo $cfg['min_passwd_length']; ?>" required disabled />
+                <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd ?>" placeholder="Mandatory password" minlength="<?php echo $cfg['min_passwd_length']; ?>" required disabled />
               </div>
             </div>
             <!-- Actions -->
