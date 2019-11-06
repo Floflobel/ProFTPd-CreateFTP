@@ -84,7 +84,6 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     $userdata = array($field_id       => $_REQUEST[$field_id],
                       $field_ftpname   => $user[$field_ftpname],
                       $field_uid      => $user[$field_uid],
-                      $field_ugid     => $_REQUEST[$field_ugid],
                       $field_passwd   => $_REQUEST[$field_passwd],
                       $field_path  => $cfg['default_path'] . "/" . $_REQUEST[$field_ftpname],
                       $field_shell    => $user[$field_shell],
@@ -112,7 +111,6 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
 if (empty($errormsg)) {
   /* Default values */
   $uid      = $user[$field_uid];
-  $ugid     = $user[$field_ugid];
   $passwd   = '';
   $path  = substr($user[$field_path], strlen($cfg['default_path']));
   $shell    = $user[$field_shell];
@@ -125,8 +123,6 @@ if (empty($errormsg)) {
   /* This is a failed attempt */
   $ftpname   = $_REQUEST[$field_ftpname];
   $uid      = $_REQUEST[$field_uid];
-  $ugid     = $_REQUEST[$field_ugid];
-  $ad_gid   = $_REQUEST[$field_ad_gid];
   $passwd   = $_REQUEST[$field_passwd];
   $path  = $_REQUEST[$field_path];
   $shell    = $_REQUEST[$field_shell];
