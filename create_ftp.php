@@ -20,8 +20,8 @@ $ac = new AdminClass($cfg);
 $field_uid      = $cfg['field_uid'];
 $field_login	= $cfg['field_login'];
 $field_ftpname	= $cfg['field_ftpname'];
-#$field_passwd   = $cfg['field_passwd'];
-$field_passwd   = $ac->generate_random_string((int) $cfg['default_passwd_length']);;
+$field_passwd   = $cfg['field_passwd'];
+#$field_passwd   = $ac->generate_random_string((int) $cfg['default_passwd_length']);;
 $field_path	= $cfg['field_path'];
 $field_shell    = $cfg['field_shell'];
 
