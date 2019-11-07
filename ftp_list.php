@@ -17,40 +17,44 @@ global $cfg;
 
 $ac = new AdminClass($cfg);
 
-$field_userid   = $cfg['field_userid'];
-$field_id       = $cfg['field_id'];
+$field_id      = $cfg['field_id'];
 $field_uid      = $cfg['field_uid'];
-$field_ugid     = $cfg['field_ugid'];
-$field_homedir  = $cfg['field_homedir'];
+$field_login    = $cfg['field_login'];
+$field_ftpname  = $cfg['field_ftpname'];
+$field_passwd   = $cfg['field_passwd'];
+$field_path     = $cfg['field_path'];
 $field_shell    = $cfg['field_shell'];
-$field_name     = $cfg['field_name'];
-$field_company  = $cfg['field_company'];
-$field_email    = $cfg['field_email'];
-$field_disabled = $cfg['field_disabled'];
 
 $field_login_count    = $cfg['field_login_count'];
 $field_last_login     = $cfg['field_last_login'];
+$field_create_date     = $cfg['field_create_date'];
 $field_bytes_in_used  = $cfg['field_bytes_in_used'];
 $field_bytes_out_used = $cfg['field_bytes_out_used'];
 $field_files_in_used  = $cfg['field_files_in_used'];
 $field_files_out_used = $cfg['field_files_out_used'];
 
-$all_groups = $ac->get_groups();
-$groups = $ac->parse_groups();
 $all_users = $ac->get_users();
 $users = array();
+
+/* return SFTP name and password */
+if (isset($_GET["create_ftpname"]) && isset($_GET["create_password"])) {
+  $infomsg = 'The SFTP has been created. <br /> SFTP name: ' . $_GET["create_ftpname"] . ' <br /> Password: ' . $_GET["create_password"];
+}
+if (isset($_GET["update_ftpname"]) && isset($_GET["update_password"])) {
+  $infomsg = 'The SFTP password has been updated. <br /> SFTP name: ' . $_GET["update_ftpname"] . ' <br /> Password: ' . $_GET["update_password"];
+}
 
 /* parse filter  */
 $userfilter = array();
 $ufilter="";
 // see config_example.php on howto activate
-if ($cfg['userid_filter_separator'] != "") {
+if ($cfg['ftpname_filter_separator'] != "") {
   $ufilter = isset($_REQUEST["uf"]) ? $_REQUEST["uf"] : "";
   foreach ($all_users as $user) {
-    $pos = strpos($user[$field_userid], $cfg['userid_filter_separator']);
-    // userid's should not start with a - !
+    $pos = strpos($user[$field_ftpname], $cfg['ftpname_filter_separator']);
+    // ftpname's should not start with a - !
     if ($pos != FALSE) {
-      $prefix = substr($user[$field_userid], 0, $pos);
+      $prefix = substr($user[$field_ftpname], 0, $pos);
       if(@$userfilter[$prefix] == "") {
         $userfilter[$prefix] = $prefix;
       }
@@ -62,11 +66,11 @@ if ($cfg['userid_filter_separator'] != "") {
 if (!empty($all_users)) {
   foreach ($all_users as $user) { 
     if ($ufilter != "") {
-      if ($ufilter == "None" && strpos($user[$field_userid], $cfg['userid_filter_separator'])) {
+      if ($ufilter == "None" && strpos($user[$field_ftpname], $cfg['ftpname_filter_separator'])) {
         // filter is None and user has a prefix
         continue;
       }
-      if ($ufilter != "None" && strncmp($user[$field_userid], $ufilter, strlen($ufilter)) != 0) {
+      if ($ufilter != "None" && strncmp($user[$field_ftpname], $ufilter, strlen($ufilter)) != 0) {
         // filter is something else and user does not have a prefix
       	continue;
       }
@@ -93,7 +97,7 @@ include ("includes/header.php");
           </div>
           <!-- Actions -->
           <div class="form-group">
-            <a class="btn btn-primary pull-right" href="add_user.php" role="button">Add user &raquo;</a>
+            <a class="btn btn-primary pull-right" href="index.php" role="button">Create SFTP &raquo;</a>
           </div>
         </div>
       </div>
@@ -114,13 +118,13 @@ include ("includes/header.php");
           <div class="form-group">
             <label>Prefix filter:</label>
             <div class="btn-group" role="group">
-              <a type="button" class="btn btn-default" href="users.php">All users</a>
-              <a type="button" class="btn btn-default" href="users.php?uf=None">No prefix</a>
+              <a type="button" class="btn btn-default" href="ftp_list.php">All users</a>
+              <a type="button" class="btn btn-default" href="ftp_list.php?uf=None">No prefix</a>
               <div class="btn-group" role="group">
                 <button type="button" class="btn btn-default dropdown-toggle" id="idPrefix" data-toggle="dropdown" aria-expanded="false">Prefix <span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="idPrefix">
                 <?php foreach ($userfilter as $uf) { ?>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="users.php?uf=<?php echo $uf; ?>"><?php echo $uf; ?></a></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="ftp_list.php?uf=<?php echo $uf; ?>"><?php echo $uf; ?></a></li>
                 <?php } ?>
                 </ul>
               </div>
@@ -131,39 +135,32 @@ include ("includes/header.php");
           <div class="form-group">
             <table class="table table-striped table-condensed sortable">
               <thead>
-                <th>UID</th>
-                <th><span class="glyphicon glyphicon-user" aria-hidden="true" title="User name"></th>
-                <th class="hidden-xs hidden-sm" data-defaultsort="disabled"><span class="glyphicon glyphicon-tags" aria-hidden="true" title="Additional groups"></th>
+                <th class="hidden-xs hidden-sm" data-defaultsort="disabled"><span class="glyphicon glyphicon-tags" aria-hidden="true" title="SFTP Name"></th>
                 <th class="hidden-xs hidden-sm hidden-md"><span class="glyphicon glyphicon-time" aria-hidden="true" title="Last login"></th>
                 <th class="hidden-xs hidden-sm"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" title="Login count"></th>
                 <th class="hidden-xs"><span class="glyphicon glyphicon-signal" aria-hidden="true" title="Uploaded MBs"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true" title="Uploaded MBs"></th>
                 <th class="hidden-xs"><span class="glyphicon glyphicon-signal" aria-hidden="true" title="Downloaded MBs"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" title="Downloaded MBs"></th>
                 <th class="hidden-xs"><span class="glyphicon glyphicon-file" aria-hidden="true" title="Uploaded files"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true" title="Uploaded files"></th>
                 <th class="hidden-xs"><span class="glyphicon glyphicon-file" aria-hidden="true" title="Downloaded files"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" title="Downloaded files"></th>
-                <th class="hidden-xs hidden-sm"><span class="glyphicon glyphicon-home" aria-hidden="true" title="Home directory"></th>
-                <th class="hidden-xs hidden-sm"><span class="glyphicon glyphicon-envelope" aria-hidden="true" title="E-mail"></th>
-                <th><span class="glyphicon glyphicon-lock" aria-hidden="true" title="Suspended"></th>
+                <th><span class="glyphicon glyphicon-user" aria-hidden="true" title="Login"></th>
+                <th class="hidden-xs hidden-sm hidden-md"><span class="glyphicon glyphicon-time" aria-hidden="true" title="Create date"></th>
                 <th data-defaultsort="disabled"></th>
               </thead>
               <tbody>
                 <?php foreach ($users as $user) { ?>
                   <tr>
-                    <td class="pull-middle"><?php echo $user[$field_uid]; ?></td>
-                    <td class="pull-middle"><a href="edit_user.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><?php echo $user[$field_userid]; ?></a></td>
-                    <td class="pull-middle"><?php echo $all_groups[$user[$field_ugid]]; ?></td>
+                    <td class="pull-middle"><a href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><?php echo $user[$field_ftpname]; ?></a/></td>
                     <td class="pull-middle hidden-xs hidden-sm hidden-md"><?php echo $user[$field_last_login]; ?></td>
                     <td class="pull-middle hidden-xs hidden-sm"><?php echo $user[$field_login_count]; ?></td>
                     <td class="pull-middle hidden-xs"><?php echo sprintf("%2.1f", $user[$field_bytes_in_used] / 1048576); ?></td>
                     <td class="pull-middle hidden-xs"><?php echo sprintf("%2.1f", $user[$field_bytes_out_used] / 1048576); ?></td>
                     <td class="pull-middle hidden-xs"><?php echo $user[$field_files_in_used]; ?></td>
                     <td class="pull-middle hidden-xs"><?php echo $user[$field_files_out_used]; ?></td>
-                    <td class="pull-middle hidden-xs hidden-sm"><?php echo $user[$field_homedir]; ?></td>
-                    <td class="pull-middle hidden-xs hidden-sm"><?php echo $user[$field_email]; ?></td>
-                    <td class="pull-middle"><?php echo ($user[$field_disabled] ? 'Yes' : 'No'); ?></td>
+                    <td class="pull-middle"><?php echo $user[$field_login]; ?></td>
+                    <td class="pull-middle hidden-xs hidden-sm hidden-md"><?php echo $user[$field_create_date]; ?></td>
                     <td class="pull-middle">
                       <div class="btn-toolbar pull-right" role="toolbar">
-                        <a class="btn-group" role="group" href="edit_user.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-                        <a class="btn-group" role="group" href="remove_user.php?action=remove&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                        <a class="btn-group" role="group" href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                       </div>
                     </td>
                   </tr>
@@ -173,7 +170,7 @@ include ("includes/header.php");
           </div>
           <!-- Actions -->
           <div class="form-group">
-            <a class="btn btn-primary pull-right" href="add_user.php" role="button">Add user &raquo;</a>
+            <a class="btn btn-primary pull-right" href="index.php" role="button">Create SFTP &raquo;</a>
           </div>
         </div>
       </div>
