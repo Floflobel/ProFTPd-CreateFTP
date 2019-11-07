@@ -46,7 +46,7 @@ if (isset($_GET["create_ftpname"]) && !isset($_GET["create_password"])) {
   $infomsg = 'The FTP has been created. <br /> FTP name: ' . $create_ftpname . ' <br /> Password: ' . $create_password;
 }
 if (isset($_GET["update_ftpname"]) && !isset($_GET["update_password"])) {
-  $infomsg = 'The FTP password has been updated. <br /> FTP name: ' . $update_ftpname . ' <br /> Password: ' . $update_password;
+  $infomsg = 'The FTP password has been updated. <br /> FTP name: ' . $_GET["update_ftpname"] . ' <br /> Password: ' . $_GET["update_password"];
 }
 
 /* parse filter  */
