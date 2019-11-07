@@ -102,7 +102,7 @@ include ("includes/header.php");
           </div>
           <!-- Actions -->
           <div class="form-group">
-            <a class="btn btn-primary pull-right" href="create_ftp.php" role="button">Create FTP &raquo;</a>
+            <a class="btn btn-primary pull-right" href="index.php" role="button">Create FTP &raquo;</a>
           </div>
         </div>
       </div>
@@ -177,7 +177,7 @@ include ("includes/header.php");
           </div>
           <!-- Actions -->
           <div class="form-group">
-            <a class="btn btn-primary pull-right" href="create_ftp.php" role="button">Create FTP &raquo;</a>
+            <a class="btn btn-primary pull-right" href="index.php" role="button">Create FTP &raquo;</a>
           </div>
         </div>
       </div>

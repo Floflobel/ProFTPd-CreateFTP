@@ -19,9 +19,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li <?php if (strpos($_SERVER['REQUEST_URI'], 'index.php') !== FALSE) { ?>class="active"<?php } ?>><a href="index.php">Home</a></li>
+            <li <?php if (strpos($_SERVER['REQUEST_URI'], 'index.php') !== FALSE) { ?>class="active"<?php } ?>><a href="index.php">Create FTP</a></li>
             <li <?php if (strpos($_SERVER['REQUEST_URI'], 'ftp_list.php') !== FALSE) { ?>class="active"<?php } ?>><a href="ftp_list.php">FTP List</a></li>
-            <li <?php if (strpos($_SERVER['REQUEST_URI'], 'create_ftp.php') !== FALSE) { ?>class="active"<?php } ?>><a href="create_ftp.php">Create FTP</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div>
