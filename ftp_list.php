@@ -26,6 +26,7 @@ $field_path     = $cfg['field_path'];
 $field_shell    = $cfg['field_shell'];
 
 $field_login_count    = $cfg['field_login_count'];
+$field_last_login     = $cfg['field_last_login'];
 $field_create_date     = $cfg['field_create_date'];
 $field_bytes_in_used  = $cfg['field_bytes_in_used'];
 $field_bytes_out_used = $cfg['field_bytes_out_used'];
@@ -135,7 +136,7 @@ include ("includes/header.php");
             <table class="table table-striped table-condensed sortable">
               <thead>
                 <th class="hidden-xs hidden-sm" data-defaultsort="disabled"><span class="glyphicon glyphicon-tags" aria-hidden="true" title="SFTP Name"></th>
-                <th>UID</th>
+                <th class="hidden-xs hidden-sm hidden-md"><span class="glyphicon glyphicon-time" aria-hidden="true" title="Last login"></th>
                 <th class="hidden-xs hidden-sm"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" title="Login count"></th>
                 <th class="hidden-xs"><span class="glyphicon glyphicon-signal" aria-hidden="true" title="Uploaded MBs"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true" title="Uploaded MBs"></th>
                 <th class="hidden-xs"><span class="glyphicon glyphicon-signal" aria-hidden="true" title="Downloaded MBs"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" title="Downloaded MBs"></th>
@@ -148,9 +149,8 @@ include ("includes/header.php");
               <tbody>
                 <?php foreach ($users as $user) { ?>
                   <tr>
-
                     <td class="pull-middle"><a href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><?php echo $user[$field_ftpname]; ?></a/></td>
-                    <td class="pull-middle"><?php echo $user[$field_uid]; ?></td>
+                    <td class="pull-middle hidden-xs hidden-sm hidden-md"><?php echo $user[$field_last_login]; ?></td>
                     <td class="pull-middle hidden-xs hidden-sm"><?php echo $user[$field_login_count]; ?></td>
                     <td class="pull-middle hidden-xs"><?php echo sprintf("%2.1f", $user[$field_bytes_in_used] / 1048576); ?></td>
                     <td class="pull-middle hidden-xs"><?php echo sprintf("%2.1f", $user[$field_bytes_out_used] / 1048576); ?></td>
