@@ -36,11 +36,11 @@ $all_users = $ac->get_users();
 $users = array();
 
 /* return FTP name and password */
-$update_ftpname = $_GET["update_ftpname"];
-$update_password = $_GET["update_password"];
-
-$create_ftpname = $_GET["create_ftpname"];
-$create_password = $_GET["create_password"];
+#$update_ftpname = $_GET["update_ftpname"];
+#$update_password = $_GET["update_password"];
+#
+#$create_ftpname = $_GET["create_ftpname"];
+#$create_password = $_GET["create_password"];
 
 if (!isset($_GET["create_ftpname"]) && !isset($_GET["create_password"])) {
   $infomsg = 'The FTP has been created. <br /> FTP name: ' . $create_ftpname . ' <br /> Password: ' . $create_password;
