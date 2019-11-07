@@ -109,12 +109,12 @@ include ("includes/header.php");
 <?php include ("includes/messages.php"); ?>
 
 <?php if (is_array($user)) { ?>
-<!-- FTP metadata panel -->
+<!-- SFTP metadata panel -->
 <div class="col-xs-12 col-sm-6">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">
-        <a data-toggle="collapse" href="#userstats" aria-expanded="true" aria-controls="userstats">FTP statistics</a>
+        <a data-toggle="collapse" href="#userstats" aria-expanded="true" aria-controls="userstats">SFTP statistics</a>
       </h3>
     </div>
     <div class="panel-body collapse in" id="userstats" aria-expanded="true">
@@ -179,15 +179,15 @@ include ("includes/header.php");
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">
-        <a data-toggle="collapse" href="#userprops" aria-expanded="true" aria-controls="userprops">FTP properties</a>
+        <a data-toggle="collapse" href="#userprops" aria-expanded="true" aria-controls="userprops">SFTP properties</a>
       </h3>
     </div>
     <div class="panel-body collapse in" id="userprops" aria-expanded="true">
       <div class="col-sm-12">
         <form role="form" class="form-horizontal" method="post" data-toggle="validator">
-          <!-- FTP Name -->
+          <!-- SFTP Name -->
           <div class="form-group">
-            <label for="<?php echo $field_ftpname; ?>" class="col-sm-4 control-label">FTP Name</label>
+            <label for="<?php echo $field_ftpname; ?>" class="col-sm-4 control-label">SFTP Name</label>
             <div class="controls col-sm-8">
               <input type="text" class="form-control" id="<?php echo $field_ftpname; ?>" name="<?php echo $field_ftpname; ?>" value="<?php echo $ftpname; ?>" readonly />
             </div>
@@ -203,7 +203,7 @@ include ("includes/header.php");
           <div class="form-group">
             <div class="col-sm-12">
               <input type="hidden" name="<?php echo $field_id; ?>" value="<?php echo $id; ?>" />
-              <a class="btn btn-danger" href="remove_ftp.php?action=remove&<?php echo $field_id; ?>=<?php echo $id; ?>">Remove FTP</a>
+              <a class="btn btn-danger" href="remove_ftp.php?action=remove&<?php echo $field_id; ?>=<?php echo $id; ?>">Remove SFTP</a>
               <button type="submit" class="btn btn-primary pull-right" name="action" value="update">Change password</button>
             </div>
           </div>

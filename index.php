@@ -28,11 +28,11 @@ $passwd = $ac->generate_random_string((int) $cfg['default_passwd_length']);
 /* Data validation */
 if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "create") {
   $errors = array();
-  /* FTP name validation */
+  /* SFTP name validation */
   if (empty($_REQUEST[$field_ftpname])
       || !preg_match($cfg['ftpname_regex'], $_REQUEST[$field_ftpname])
       || strlen($_REQUEST[$field_ftpname]) > $cfg['max_ftpname_length']) {
-    array_push($errors, 'Invalid FTP name; FTP name must contain only letters, numbers, hyphens, and underscores with a maximum of '.$cfg['max_ftpname_length'].' characters.');
+    array_push($errors, 'Invalid SFTP name; SFTP name must contain only letters, numbers, hyphens, and underscores with a maximum of '.$cfg['max_ftpname_length'].' characters.');
   }
   /* uid validation */
   if (empty($cfg['default_uid']) || !$ac->is_valid_id($cfg['default_uid'])) {
@@ -51,9 +51,9 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
   if (strlen($cfg['default_shell']) <= 1) {
     array_push($errors, 'Invalid shell; shell cannot be empty.');
   }
-  /* FTP name uniqueness validation */
+  /* SFTP name uniqueness validation */
   if ($ac->check_username($_REQUEST[$field_ftpname])) {
-    array_push($errors, 'FTP name already exists; name must be unique.');
+    array_push($errors, 'SFTP name already exists; name must be unique.');
   }
   /* data validation passed */
   if (count($errors) == 0) {
@@ -64,10 +64,10 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
                       $field_path  => $cfg['default_path'] . '/' . $_REQUEST[$field_ftpname],
                       $field_shell    => $cfg['default_shell']);
     if ($ac->add_user($userdata)) {
-      $infomsg = 'FTP "'.$_REQUEST[$field_ftpname].'" created successfully.';
+      $infomsg = 'SFTP "'.$_REQUEST[$field_ftpname].'" created successfully.';
       header('Location: ftp_list.php?create_ftpname=' . $_REQUEST[$field_ftpname] . '&create_password='. $_REQUEST[$field_passwd]);
     } else {
-      $errormsg = 'FTP "'.$_REQUEST[$field_ftpname].'" creation failed; check log files.';
+      $errormsg = 'SFTP "'.$_REQUEST[$field_ftpname].'" creation failed; check log files.';
     }
   } else {
     $errormsg = implode($errors, "<br />\n");
@@ -107,17 +107,17 @@ include ("includes/header.php");
 <div class="col-xs-12 col-sm-8 col-md-6 center">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Add FTP</h3>
+      <h3 class="panel-title">Add SFTP</h3>
     </div>
     <div class="panel-body">
       <div class="row">
         <div class="col-sm-12">
           <form role="form" class="form-horizontal" method="post" data-toggle="validator">
-            <!-- FTP name -->
+            <!-- SFTP name -->
             <div class="form-group">
-              <label for="<?php echo $field_ftpname; ?>" class="col-sm-4 control-label">FTP name <font color="red">*</font></label>
+              <label for="<?php echo $field_ftpname; ?>" class="col-sm-4 control-label">SFTP name <font color="red">*</font></label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_ftpname; ?>" name="<?php echo $field_ftpname; ?>" value="<?php echo $ftpname; ?>" placeholder="Name of your FTP" maxlength="<?php echo $cfg['max_ftpname_length']; ?>" pattern="<?php echo substr($cfg['ftpname_regex'], 2, -3); ?>" required />
+                <input type="text" class="form-control" id="<?php echo $field_ftpname; ?>" name="<?php echo $field_ftpname; ?>" value="<?php echo $ftpname; ?>" placeholder="Name of your SFTP" maxlength="<?php echo $cfg['max_ftpname_length']; ?>" pattern="<?php echo substr($cfg['ftpname_regex'], 2, -3); ?>" required />
                 <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_ftpname_length']; ?> characters.</small></p>
               </div>
             </div>
@@ -131,8 +131,8 @@ include ("includes/header.php");
             <!-- Actions -->
             <div class="form-group">
               <div class="col-sm-12">
-                <a class="btn btn-default" href="ftp_list.php">&laquo; View FTP</a>
-                <button type="submit" class="btn btn-primary pull-right" name="action" value="create">Create FTP</button>
+                <a class="btn btn-default" href="ftp_list.php">&laquo; View SFTP</a>
+                <button type="submit" class="btn btn-primary pull-right" name="action" value="create">Create SFTP</button>
               </div>
             </div>
           </form>

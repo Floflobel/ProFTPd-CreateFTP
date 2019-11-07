@@ -35,18 +35,12 @@ $field_files_out_used = $cfg['field_files_out_used'];
 $all_users = $ac->get_users();
 $users = array();
 
-/* return FTP name and password */
-#$update_ftpname = $_GET["update_ftpname"];
-#$update_password = $_GET["update_password"];
-#
-#$create_ftpname = $_GET["create_ftpname"];
-#$create_password = $_GET["create_password"];
-
+/* return SFTP name and password */
 if (isset($_GET["create_ftpname"]) && isset($_GET["create_password"])) {
-  $infomsg = 'The FTP has been created. <br /> FTP name: ' . $_GET["create_ftpname"] . ' <br /> Password: ' . $_GET["create_password"];
+  $infomsg = 'The SFTP has been created. <br /> SFTP name: ' . $_GET["create_ftpname"] . ' <br /> Password: ' . $_GET["create_password"];
 }
 if (isset($_GET["update_ftpname"]) && isset($_GET["update_password"])) {
-  $infomsg = 'The FTP password has been updated. <br /> FTP name: ' . $_GET["update_ftpname"] . ' <br /> Password: ' . $_GET["update_password"];
+  $infomsg = 'The SFTP password has been updated. <br /> SFTP name: ' . $_GET["update_ftpname"] . ' <br /> Password: ' . $_GET["update_password"];
 }
 
 /* parse filter  */
@@ -102,7 +96,7 @@ include ("includes/header.php");
           </div>
           <!-- Actions -->
           <div class="form-group">
-            <a class="btn btn-primary pull-right" href="index.php" role="button">Create FTP &raquo;</a>
+            <a class="btn btn-primary pull-right" href="index.php" role="button">Create SFTP &raquo;</a>
           </div>
         </div>
       </div>
@@ -140,7 +134,7 @@ include ("includes/header.php");
           <div class="form-group">
             <table class="table table-striped table-condensed sortable">
               <thead>
-                <th class="hidden-xs hidden-sm" data-defaultsort="disabled"><span class="glyphicon glyphicon-tags" aria-hidden="true" title="FTP Name"></th>
+                <th class="hidden-xs hidden-sm" data-defaultsort="disabled"><span class="glyphicon glyphicon-tags" aria-hidden="true" title="SFTP Name"></th>
                 <th>UID</th>
                 <th class="hidden-xs hidden-sm"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" title="Login count"></th>
                 <th class="hidden-xs"><span class="glyphicon glyphicon-signal" aria-hidden="true" title="Uploaded MBs"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true" title="Uploaded MBs"></th>
@@ -177,7 +171,7 @@ include ("includes/header.php");
           </div>
           <!-- Actions -->
           <div class="form-group">
-            <a class="btn btn-primary pull-right" href="index.php" role="button">Create FTP &raquo;</a>
+            <a class="btn btn-primary pull-right" href="index.php" role="button">Create SFTP &raquo;</a>
           </div>
         </div>
       </div>
