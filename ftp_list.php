@@ -135,7 +135,7 @@ include ("includes/header.php");
           <div class="form-group">
             <table class="table table-striped table-condensed sortable">
               <thead>
-                <th class="hidden-xs hidden-sm" data-defaultsort="disabled"><span class="glyphicon glyphicon-tags" aria-hidden="true" title="SFTP Name"></th>
+                <th class="hidden-xs hidden-sm"><span class="glyphicon glyphicon-tags" aria-hidden="true" title="SFTP Name"></th>
                 <th class="hidden-xs hidden-sm hidden-md"><span class="glyphicon glyphicon-time" aria-hidden="true" title="Last login"></th>
                 <th class="hidden-xs hidden-sm"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" title="Login count"></th>
                 <th class="hidden-xs"><span class="glyphicon glyphicon-signal" aria-hidden="true" title="Uploaded MBs"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true" title="Uploaded MBs"></th>
