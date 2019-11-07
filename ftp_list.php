@@ -161,7 +161,6 @@ include ("includes/header.php");
                     <td class="pull-middle">
                       <div class="btn-toolbar pull-right" role="toolbar">
                         <a class="btn-group" role="group" href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-                        <a class="btn-group" role="group" href="remove_ftp.php?action=remove&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                       </div>
                     </td>
                   </tr>
