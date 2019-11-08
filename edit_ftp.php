@@ -22,7 +22,7 @@ $field_uid      = $cfg['field_uid'];
 $field_login    = $cfg['field_login'];
 $field_ftpname  = $cfg['field_ftpname'];
 $field_passwd   = $cfg['field_passwd'];
-$field_path     = $cfg['field_path'];
+$field_homedir     = $cfg['field_homedir'];
 $field_shell    = $cfg['field_shell'];
 
 $field_login_count    = $cfg['field_login_count'];

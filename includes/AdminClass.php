@@ -291,7 +291,7 @@ class AdminClass {
         $field_uid      = $this->config['field_uid'];
         $field_login      = $this->config['field_login'];
         $field_passwd   = $this->config['field_passwd'];
-        $field_path  = $this->config['field_path'];
+        $field_homedir  = $this->config['field_homedir'];
         $field_shell    = $this->config['field_shell'];
         $field_create_date = $this->config['field_create_date'];
         $passwd_encryption = $this->config['passwd_encryption'];
@@ -314,14 +314,14 @@ class AdminClass {
                                   $field_ftpname,
                                   $field_uid,
                                   $field_passwd,
-                                  $field_path,
+                                  $field_homedir,
                                   $field_shell,
                                   $field_create_date,
                                   $userdata[$field_login],
                                   $userdata[$field_ftpname],
                                   $userdata[$field_uid],
                                   $passwd,
-                                  $userdata[$field_path],
+                                  $userdata[$field_homedir],
                                   $userdata[$field_shell],
                                   date('Y-m-d H:i:s'));
         $result = $this->dbConn->query($query);

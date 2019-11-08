@@ -18,7 +18,7 @@ $cfg['field_id'] = "id";
 $cfg['field_uid'] = "uid";
 $cfg['field_login'] = "login";
 $cfg['field_passwd'] = "passwd";
-$cfg['field_path'] = "path";
+$cfg['field_homedir'] = "homedir";
 $cfg['field_shell'] = "shell";
 $cfg['field_login_count'] = "login_count";
 $cfg['field_last_login'] = "last_login";
@@ -31,7 +31,7 @@ $cfg['field_files_out_used'] = "files_out_used";
 $cfg['field_members'] = "members";
 
 $cfg['default_uid'] = ""; //if empty next incremental will be default
-$cfg['default_path'] = "/srv/ftp";
+$cfg['default_homedir'] = "/srv/ftp";
 // Use either SHA1 or MD5 or any other supported by your MySQL-Server and ProFTPd
 // "pbkdf2" is supported if you are using ProFTPd 1.3.5.
 // "crypt" uses the unix crypt() function.

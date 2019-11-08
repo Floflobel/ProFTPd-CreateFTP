@@ -21,7 +21,7 @@ $field_uid      = $cfg['field_uid'];
 $field_login	= $cfg['field_login'];
 $field_ftpname	= $cfg['field_ftpname'];
 $field_passwd   = $cfg['field_passwd'];
-$field_path	= $cfg['field_path'];
+$field_homedir	= $cfg['field_homedir'];
 $field_shell    = $cfg['field_shell'];
 
 $passwd = $ac->generate_random_string((int) $cfg['default_passwd_length']);
@@ -61,7 +61,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
 		      $field_login    => $_SERVER['PHP_AUTH_USER'], 
                       $field_ftpname   => $_REQUEST[$field_ftpname],
                       $field_passwd   => $passwd,
-                      $field_path  => $cfg['default_path'] . '/' . $_REQUEST[$field_ftpname],
+                      $field_homedir  => $cfg['default_homedir'] . '/' . $_REQUEST[$field_ftpname],
                       $field_shell    => $cfg['default_shell']);
     if ($ac->add_user($userdata)) {
       $infomsg = 'SFTP "'.$_REQUEST[$field_ftpname].'" created successfully.';
@@ -81,7 +81,7 @@ if (isset($errormsg)) {
   $login  = $_REQUEST[$field_login];
   $ftpname   = $_REQUEST[$field_ftpname];
   $passwd   = $passwd;
-  $path  = $cfg['default_path'];
+  $homedir  = $cfg['default_homedir'];
   $shell    = $cfg['default_shell'];
 } else {
   /* Default values */
@@ -97,7 +97,7 @@ if (isset($errormsg)) {
     $shell  = $cfg['default_shell'];
   }
   $passwd   = $passwd;
-  $path  = $cfg['default_path'];
+  $homedir  = $cfg['default_homedir'];
 }
 
 include ("includes/header.php");
