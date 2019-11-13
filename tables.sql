@@ -11,6 +11,7 @@ CREATE TABLE `users` (
   `passwd` varchar(265) NOT NULL default '',
   `homedir` varchar(255) NOT NULL default '',
   `shell` varchar(32) NOT NULL default '/sbin/nologin',
+  `disabled` smallint(2) unsigned NOT NULL default '0',
   `bytes_in_used` bigint(20) unsigned NOT NULL default '0',
   `bytes_out_used` bigint(20) unsigned NOT NULL default '0',
   `files_in_used` bigint(20) unsigned NOT NULL default '0',
