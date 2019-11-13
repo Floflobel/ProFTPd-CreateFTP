@@ -289,6 +289,7 @@ class AdminClass {
     function add_user($userdata) {
         $field_ftpname   = $this->config['field_ftpname'];
         $field_uid      = $this->config['field_uid'];
+	$field_gid     = $this->config['field_gid'];
         $field_login      = $this->config['field_login'];
         $field_passwd   = $this->config['field_passwd'];
         $field_homedir  = $this->config['field_homedir'];
@@ -308,11 +309,12 @@ class AdminClass {
         } else {
           $passwd = $passwd_encryption.'("'.$userdata[$field_passwd].'")';
         }
-        $format = 'INSERT INTO %s (%s,%s,%s,%s,%s,%s,%s) VALUES ("%s","%s","%s",%s,"%s","%s","%s")';
+        $format = 'INSERT INTO %s (%s,%s,%s,%s,%s,%s,%s,%s) VALUES ("%s","%s","%s","%s",%s,"%s","%s","%s")';
         $query = sprintf($format, $this->config['table_users'],
                                   $field_login,
                                   $field_ftpname,
                                   $field_uid,
+				  $field_gid,
                                   $field_passwd,
                                   $field_homedir,
                                   $field_shell,
@@ -320,6 +322,7 @@ class AdminClass {
                                   $userdata[$field_login],
                                   $userdata[$field_ftpname],
                                   $userdata[$field_uid],
+				  $userdata[$field_gid],
                                   $passwd,
                                   $userdata[$field_homedir],
                                   $userdata[$field_shell],

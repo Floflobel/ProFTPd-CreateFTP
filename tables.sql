@@ -7,6 +7,7 @@ CREATE TABLE `users` (
   `login` varchar(32) NOT NULL default '',
   `ftpname` varchar(32) NOT NULL default '',
   `uid` smallint(6) unsigned default NULL,
+  `gid` smallint(6) unsigned default NULL,
   `passwd` varchar(265) NOT NULL default '',
   `homedir` varchar(255) NOT NULL default '',
   `shell` varchar(32) NOT NULL default '/sbin/nologin',

@@ -78,6 +78,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
 if (isset($errormsg)) {
   /* This is a failed attempt */
   $uid      = $cfg['default_uid'];
+  $gid  = $cfg['default_gid'];
   $login  = $_REQUEST[$field_login];
   $ftpname   = $_REQUEST[$field_ftpname];
   $passwd   = $passwd;
@@ -96,6 +97,7 @@ if (isset($errormsg)) {
   } else {
     $shell  = $cfg['default_shell'];
   }
+  $uid      = $cfg['default_uid'];
   $passwd   = $passwd;
   $homedir  = $cfg['default_homedir'];
 }
