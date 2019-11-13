@@ -584,6 +584,7 @@ class AdminClass {
                                   $passwd_query,
                                   $field_id,       $userdata[$field_id]);
         $result = $this->dbConn->query($query);
+	print_r($passwd_query);
         return $result;
     }
 
