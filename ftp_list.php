@@ -158,11 +158,6 @@ include ("includes/header.php");
                     <td class="pull-middle hidden-xs"><?php echo $user[$field_files_out_used]; ?></td>
                     <td class="pull-middle"><?php echo $user[$field_login]; ?></td>
                     <td class="pull-middle hidden-xs hidden-sm hidden-md"><?php echo $user[$field_create_date]; ?></td>
-                    <td class="pull-middle">
-                      <div class="btn-toolbar pull-right" role="toolbar">
-                        <a class="btn-group" role="group" href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-                      </div>
-                    </td>
                   </tr>
                 <?php } ?>
               </tbody>
