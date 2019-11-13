@@ -67,7 +67,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
                       $field_shell    => $cfg['default_shell']);
     if ($ac->add_user($userdata)) {
       $infomsg = 'SFTP "'.$_REQUEST[$field_userid].'" created successfully.';
-      header('Location: ftp_list.php?create_userid=' . $_REQUEST[$field_userid] . '&create_password='. $_REQUEST[$field_passwd]);
+      header('Location: ftp_list.php?create_userid=' . $_REQUEST[$field_userid] . '&create_password='. $_REQUEST[$passwd]);
     } else {
       $errormsg = 'SFTP "'.$_REQUEST[$field_userid].'" creation failed; check log files.';
     }
