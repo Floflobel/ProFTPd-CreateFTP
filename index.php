@@ -26,6 +26,7 @@ $field_homedir	= $cfg['field_homedir'];
 $field_shell    = $cfg['field_shell'];
 
 $passwd = $ac->generate_random_string((int) $cfg['default_passwd_length']);
+
 /* Data validation */
 if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "create") {
   $errors = array();
@@ -62,13 +63,13 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
 		      $field_gid    => $cfg['default_gid'], 
 		      $field_login    => $_SERVER['PHP_AUTH_USER'], 
                       $field_userid   => $_REQUEST[$field_userid],
-                      $field_passwd   => $passwd,
+                      #$field_passwd   => $passwd,
+                      $field_passwd   => $_REQUEST[$field_passwd],
                       $field_homedir  => $cfg['default_homedir'] . '/' . $_REQUEST[$field_userid],
                       $field_shell    => $cfg['default_shell']);
     if ($ac->add_user($userdata)) {
-      $errormsg = 'Info: ' . $field_passwd . " & " . $passwd . " - ";
-      #$infomsg = 'SFTP "'.$_REQUEST[$field_userid].'" created successfully.';
-      #header('Location: ftp_list.php?create_userid=' . $_REQUEST[$field_userid] . '&create_password='. $_REQUEST[$field_passwd]);
+      $infomsg = 'SFTP "'.$_REQUEST[$field_userid].'" created successfully.';
+      header('Location: ftp_list.php?create_userid=' . $_REQUEST[$field_userid] . '&create_password='. $_REQUEST[$field_passwd]);
     } else {
       $errormsg = 'SFTP "'.$_REQUEST[$field_userid].'" creation failed; check log files.';
     }
