@@ -20,7 +20,7 @@ $ac = new AdminClass($cfg);
 $field_id      = $cfg['field_id'];
 $field_uid      = $cfg['field_uid'];
 $field_login    = $cfg['field_login'];
-$field_ftpname  = $cfg['field_ftpname'];
+$field_userid  = $cfg['field_userid'];
 $field_passwd   = $cfg['field_passwd'];
 $field_homedir     = $cfg['field_homedir'];
 $field_shell    = $cfg['field_shell'];
@@ -54,10 +54,10 @@ if (!$ac->is_valid_id($id)) {
 if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "update") {
   $errors = array();
   /* user id validation */
-  if (empty($_REQUEST[$field_ftpname])
-      || !preg_match($cfg['ftpname_regex'], $_REQUEST[$field_ftpname])
-      || strlen($_REQUEST[$field_ftpname]) > $cfg['max_ftpname_length']) {
-    array_push($errors, 'Invalid user name; user name must contain only letters, numbers, hyphens, and underscores with a maximum of '.$cfg['max_ftpname_length'].' characters.');
+  if (empty($_REQUEST[$field_userid])
+      || !preg_match($cfg['userid_regex'], $_REQUEST[$field_userid])
+      || strlen($_REQUEST[$field_userid]) > $cfg['max_userid_length']) {
+    array_push($errors, 'Invalid user name; user name must contain only letters, numbers, hyphens, and underscores with a maximum of '.$cfg['max_userid_length'].' characters.');
   }
   /* uid validation */
   if (empty($user[$field_uid]) || !$ac->is_valid_id($user[$field_uid])) {
@@ -81,7 +81,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     $userdata = array($field_id       => $_REQUEST[$field_id],
                       $field_passwd   => $passwd);
     if (!$ac->update_user($userdata)) {
-      $errormsg = 'User "'.$_REQUEST[$field_ftpname].'" update failed; check log files.';
+      $errormsg = 'User "'.$_REQUEST[$field_userid].'" update failed; check log files.';
     } else {
       /* update user data */
       $user = $ac->get_user_by_id($id);
@@ -91,8 +91,8 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
   }
   if (empty($errormsg)) {
     /* update additional groups */
-    $infomsg = 'User "'.$_REQUEST[$field_ftpname].'" updated successfully.';
-    header('Location: ftp_list.php?update_ftpname=' . $_REQUEST[$field_ftpname] . '&update_password='. $_REQUEST[$field_passwd]);
+    $infomsg = 'User "'.$_REQUEST[$field_userid].'" updated successfully.';
+    header('Location: ftp_list.php?update_userid=' . $_REQUEST[$field_userid] . '&update_password='. $_REQUEST[$field_passwd]);
   }
 }
 
@@ -100,7 +100,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
 if (empty($errormsg)) {
   /* Default values */
   $uid      = $user[$field_uid];
-  $ftpname      = $user[$field_ftpname];
+  $userid      = $user[$field_userid];
   $passwd   = $passwd;
 }
 
@@ -187,9 +187,9 @@ include ("includes/header.php");
         <form role="form" class="form-horizontal" method="post" data-toggle="validator">
           <!-- SFTP Name -->
           <div class="form-group">
-            <label for="<?php echo $field_ftpname; ?>" class="col-sm-4 control-label">SFTP Name</label>
+            <label for="<?php echo $field_userid; ?>" class="col-sm-4 control-label">SFTP Name</label>
             <div class="controls col-sm-8">
-              <input type="text" class="form-control" id="<?php echo $field_ftpname; ?>" name="<?php echo $field_ftpname; ?>" value="<?php echo $ftpname; ?>" readonly />
+              <input type="text" class="form-control" id="<?php echo $field_userid; ?>" name="<?php echo $field_userid; ?>" value="<?php echo $userid; ?>" readonly />
             </div>
           </div>
           <!-- Password -->

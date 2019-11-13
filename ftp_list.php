@@ -20,7 +20,7 @@ $ac = new AdminClass($cfg);
 $field_id      = $cfg['field_id'];
 $field_uid      = $cfg['field_uid'];
 $field_login    = $cfg['field_login'];
-$field_ftpname  = $cfg['field_ftpname'];
+$field_userid  = $cfg['field_userid'];
 $field_passwd   = $cfg['field_passwd'];
 $field_homedir     = $cfg['field_homedir'];
 $field_shell    = $cfg['field_shell'];
@@ -37,24 +37,24 @@ $all_users = $ac->get_users();
 $users = array();
 
 /* return SFTP name and password */
-if (isset($_GET["create_ftpname"]) && isset($_GET["create_password"])) {
-  $infomsg = 'The SFTP has been created. <br /> SFTP name: ' . $_GET["create_ftpname"] . ' <br /> Password: ' . $_GET["create_password"];
+if (isset($_GET["create_userid"]) && isset($_GET["create_password"])) {
+  $infomsg = 'The SFTP has been created. <br /> SFTP name: ' . $_GET["create_userid"] . ' <br /> Password: ' . $_GET["create_password"];
 }
-if (isset($_GET["update_ftpname"]) && isset($_GET["update_password"])) {
-  $infomsg = 'The SFTP password has been updated. <br /> SFTP name: ' . $_GET["update_ftpname"] . ' <br /> Password: ' . $_GET["update_password"];
+if (isset($_GET["update_userid"]) && isset($_GET["update_password"])) {
+  $infomsg = 'The SFTP password has been updated. <br /> SFTP name: ' . $_GET["update_userid"] . ' <br /> Password: ' . $_GET["update_password"];
 }
 
 /* parse filter  */
 $userfilter = array();
 $ufilter="";
 // see config_example.php on howto activate
-if ($cfg['ftpname_filter_separator'] != "") {
+if ($cfg['userid_filter_separator'] != "") {
   $ufilter = isset($_REQUEST["uf"]) ? $_REQUEST["uf"] : "";
   foreach ($all_users as $user) {
-    $pos = strpos($user[$field_ftpname], $cfg['ftpname_filter_separator']);
-    // ftpname's should not start with a - !
+    $pos = strpos($user[$field_userid], $cfg['userid_filter_separator']);
+    // userid's should not start with a - !
     if ($pos != FALSE) {
-      $prefix = substr($user[$field_ftpname], 0, $pos);
+      $prefix = substr($user[$field_userid], 0, $pos);
       if(@$userfilter[$prefix] == "") {
         $userfilter[$prefix] = $prefix;
       }
@@ -66,11 +66,11 @@ if ($cfg['ftpname_filter_separator'] != "") {
 if (!empty($all_users)) {
   foreach ($all_users as $user) { 
     if ($ufilter != "") {
-      if ($ufilter == "None" && strpos($user[$field_ftpname], $cfg['ftpname_filter_separator'])) {
+      if ($ufilter == "None" && strpos($user[$field_userid], $cfg['userid_filter_separator'])) {
         // filter is None and user has a prefix
         continue;
       }
-      if ($ufilter != "None" && strncmp($user[$field_ftpname], $ufilter, strlen($ufilter)) != 0) {
+      if ($ufilter != "None" && strncmp($user[$field_userid], $ufilter, strlen($ufilter)) != 0) {
         // filter is something else and user does not have a prefix
       	continue;
       }
@@ -149,7 +149,7 @@ include ("includes/header.php");
               <tbody>
                 <?php foreach ($users as $user) { ?>
                   <tr>
-                    <td class="pull-middle"><a href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><?php echo $user[$field_ftpname]; ?></a/></td>
+                    <td class="pull-middle"><a href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><?php echo $user[$field_userid]; ?></a/></td>
                     <td class="pull-middle hidden-xs hidden-sm hidden-md"><?php echo $user[$field_last_login]; ?></td>
                     <td class="pull-middle hidden-xs hidden-sm"><?php echo $user[$field_login_count]; ?></td>
                     <td class="pull-middle hidden-xs"><?php echo sprintf("%2.1f", $user[$field_bytes_in_used] / 1048576); ?></td>

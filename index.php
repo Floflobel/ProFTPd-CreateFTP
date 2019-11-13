@@ -20,7 +20,7 @@ $ac = new AdminClass($cfg);
 $field_uid      = $cfg['field_uid'];
 $field_gid      = $cfg['field_gid'];
 $field_login	= $cfg['field_login'];
-$field_ftpname	= $cfg['field_ftpname'];
+$field_userid	= $cfg['field_userid'];
 $field_passwd   = $cfg['field_passwd'];
 $field_homedir	= $cfg['field_homedir'];
 $field_shell    = $cfg['field_shell'];
@@ -30,10 +30,10 @@ $passwd = $ac->generate_random_string((int) $cfg['default_passwd_length']);
 if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "create") {
   $errors = array();
   /* SFTP name validation */
-  if (empty($_REQUEST[$field_ftpname])
-      || !preg_match($cfg['ftpname_regex'], $_REQUEST[$field_ftpname])
-      || strlen($_REQUEST[$field_ftpname]) > $cfg['max_ftpname_length']) {
-    array_push($errors, 'Invalid SFTP name; SFTP name must contain only letters, numbers, hyphens, and underscores with a maximum of '.$cfg['max_ftpname_length'].' characters.');
+  if (empty($_REQUEST[$field_userid])
+      || !preg_match($cfg['userid_regex'], $_REQUEST[$field_userid])
+      || strlen($_REQUEST[$field_userid]) > $cfg['max_userid_length']) {
+    array_push($errors, 'Invalid SFTP name; SFTP name must contain only letters, numbers, hyphens, and underscores with a maximum of '.$cfg['max_userid_length'].' characters.');
   }
   /* uid validation */
   if (empty($cfg['default_uid']) || !$ac->is_valid_id($cfg['default_uid'])) {
@@ -53,7 +53,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     array_push($errors, 'Invalid shell; shell cannot be empty.');
   }
   /* SFTP name uniqueness validation */
-  if ($ac->check_username($_REQUEST[$field_ftpname])) {
+  if ($ac->check_username($_REQUEST[$field_userid])) {
     array_push($errors, 'SFTP name already exists; name must be unique.');
   }
   /* data validation passed */
@@ -61,15 +61,15 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     $userdata = array($field_uid      => $cfg['default_uid'],
 		      $field_gid    => $cfg['default_gid'], 
 		      $field_login    => $_SERVER['PHP_AUTH_USER'], 
-                      $field_ftpname   => $_REQUEST[$field_ftpname],
+                      $field_userid   => $_REQUEST[$field_userid],
                       $field_passwd   => $passwd,
-                      $field_homedir  => $cfg['default_homedir'] . '/' . $_REQUEST[$field_ftpname],
+                      $field_homedir  => $cfg['default_homedir'] . '/' . $_REQUEST[$field_userid],
                       $field_shell    => $cfg['default_shell']);
     if ($ac->add_user($userdata)) {
-      $infomsg = 'SFTP "'.$_REQUEST[$field_ftpname].'" created successfully.';
-      header('Location: ftp_list.php?create_ftpname=' . $_REQUEST[$field_ftpname] . '&create_password='. $_REQUEST[$field_passwd]);
+      $infomsg = 'SFTP "'.$_REQUEST[$field_userid].'" created successfully.';
+      header('Location: ftp_list.php?create_userid=' . $_REQUEST[$field_userid] . '&create_password='. $_REQUEST[$field_passwd]);
     } else {
-      $errormsg = 'SFTP "'.$_REQUEST[$field_ftpname].'" creation failed; check log files.';
+      $errormsg = 'SFTP "'.$_REQUEST[$field_userid].'" creation failed; check log files.';
     }
   } else {
     $errormsg = implode($errors, "<br />\n");
@@ -82,13 +82,13 @@ if (isset($errormsg)) {
   $uid      = $cfg['default_uid'];
   $gid  = $cfg['default_gid'];
   $login  = $_REQUEST[$field_login];
-  $ftpname   = $_REQUEST[$field_ftpname];
+  $userid   = $_REQUEST[$field_userid];
   $passwd   = $passwd;
   $homedir  = $cfg['default_homedir'];
   $shell    = $cfg['default_shell'];
 } else {
   /* Default values */
-  $ftpname   = "";
+  $userid   = "";
   if (empty($cfg['default_uid'])) {
     $uid    = $ac->get_last_uid() + 1;
   } else {
@@ -120,10 +120,10 @@ include ("includes/header.php");
           <form role="form" class="form-horizontal" method="post" data-toggle="validator">
             <!-- SFTP name -->
             <div class="form-group">
-              <label for="<?php echo $field_ftpname; ?>" class="col-sm-4 control-label">SFTP name <font color="red">*</font></label>
+              <label for="<?php echo $field_userid; ?>" class="col-sm-4 control-label">SFTP name <font color="red">*</font></label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_ftpname; ?>" name="<?php echo $field_ftpname; ?>" value="<?php echo $ftpname; ?>" placeholder="Name of your SFTP" maxlength="<?php echo $cfg['max_ftpname_length']; ?>" pattern="<?php echo substr($cfg['ftpname_regex'], 2, -3); ?>" required />
-                <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_ftpname_length']; ?> characters.</small></p>
+                <input type="text" class="form-control" id="<?php echo $field_userid; ?>" name="<?php echo $field_userid; ?>" value="<?php echo $userid; ?>" placeholder="Name of your SFTP" maxlength="<?php echo $cfg['max_userid_length']; ?>" pattern="<?php echo substr($cfg['userid_regex'], 2, -3); ?>" required />
+                <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_userid_length']; ?> characters.</small></p>
               </div>
             </div>
             <!-- Password -->

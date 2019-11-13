@@ -5,7 +5,7 @@
 CREATE TABLE `users` (
   `id` smallint(2) unsigned NOT NULL auto_increment,
   `login` varchar(32) NOT NULL default '',
-  `ftpname` varchar(32) NOT NULL default '',
+  `userid` varchar(32) NOT NULL default '',
   `uid` smallint(6) unsigned default NULL,
   `gid` smallint(6) unsigned default NULL,
   `passwd` varchar(265) NOT NULL default '',
@@ -19,5 +19,5 @@ CREATE TABLE `users` (
   `last_login` datetime NOT NULL default '0000-00-00 00:00:00',
   `create_date` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `ftpname` (`ftpname`)
+  UNIQUE KEY `userid` (`userid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='ProFTPd FTP table';
