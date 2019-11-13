@@ -1,4 +1,16 @@
 #
+# Table structure for table `groups`
+#
+
+CREATE TABLE `groups` (
+  `groupname` varchar(32) NOT NULL default '',
+  `gid` smallint(6) unsigned NOT NULL auto_increment,
+  `members` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`gid`),
+  UNIQUE KEY `groupname` (`groupname`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='ProFTPd group table';
+
+#
 # Table structure for table `users`
 #
 
