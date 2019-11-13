@@ -149,7 +149,7 @@ include ("includes/header.php");
               <tbody>
                 <?php foreach ($users as $user) { ?>
                   <tr>
-                    <td class="pull-middle"><a href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><?php echo $user[$field_userid]; ?></a/></td>
+                    <td class="pull-middle"><?php echo $user[$field_userid]; ?></a/></td>
                     <td class="pull-middle hidden-xs hidden-sm hidden-md"><?php echo $user[$field_last_login]; ?></td>
                     <td class="pull-middle hidden-xs hidden-sm"><?php echo $user[$field_login_count]; ?></td>
                     <td class="pull-middle hidden-xs"><?php echo sprintf("%2.1f", $user[$field_bytes_in_used] / 1048576); ?></td>
@@ -158,11 +158,6 @@ include ("includes/header.php");
                     <td class="pull-middle hidden-xs"><?php echo $user[$field_files_out_used]; ?></td>
                     <td class="pull-middle"><?php echo $user[$field_login]; ?></td>
                     <td class="pull-middle hidden-xs hidden-sm hidden-md"><?php echo $user[$field_create_date]; ?></td>
-                    <td class="pull-middle">
-                      <div class="btn-toolbar pull-right" role="toolbar">
-                        <a class="btn-group" role="group" href="edit_ftp.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-                      </div>
-                    </td>
                   </tr>
                 <?php } ?>
               </tbody>
