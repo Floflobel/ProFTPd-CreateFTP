@@ -59,7 +59,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
   /* data validation passed */
   if (count($errors) == 0) {
     $userdata = array($field_uid      => $cfg['default_uid'],
-		      $field_gid    => $_cfg['default_gid'], 
+		      $field_gid    => $cfg['default_gid'], 
 		      $field_login    => $_SERVER['PHP_AUTH_USER'], 
                       $field_ftpname   => $_REQUEST[$field_ftpname],
                       $field_passwd   => $passwd,
