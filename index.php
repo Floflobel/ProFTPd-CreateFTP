@@ -63,7 +63,6 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
 		      $field_gid    => $cfg['default_gid'], 
 		      $field_login    => $_SERVER['PHP_AUTH_USER'], 
                       $field_userid   => $_REQUEST[$field_userid],
-                      #$field_passwd   => $passwd,
                       $field_passwd   => $_REQUEST[$field_passwd],
                       $field_homedir  => $cfg['default_homedir'] . '/' . $_REQUEST[$field_userid],
                       $field_shell    => $cfg['default_shell']);
