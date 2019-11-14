@@ -33,15 +33,18 @@ $field_bytes_out_used = $cfg['field_bytes_out_used'];
 $field_files_in_used  = $cfg['field_files_in_used'];
 $field_files_out_used = $cfg['field_files_out_used'];
 
+$create_custom_message = $cfg['create_custom_message'];
+$update_custom_message = $cfg['update_custom_message'];
+
 $all_users = $ac->get_users();
 $users = array();
 
 /* return SFTP name and password */
 if (isset($_GET["create_userid"]) && isset($_GET["create_password"])) {
-  $infomsg = $cfg['create_custom_message'];
+  $infomsg = $create_custom_message;
 }
 if (isset($_GET["update_userid"]) && isset($_GET["update_password"])) {
-  $infomsg = $cfg['update_custom_message'];
+  $infomsg = $update_custom_message;
 }
 
 /* parse filter  */
