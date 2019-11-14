@@ -38,10 +38,10 @@ $users = array();
 
 /* return SFTP name and password */
 if (isset($_GET["create_userid"]) && isset($_GET["create_password"])) {
-  $infomsg = $cfg['create_custom_message']
+  $infomsg = $cfg['create_custom_message'];
 }
 if (isset($_GET["update_userid"]) && isset($_GET["update_password"])) {
-  $infomsg = $cfg['update_custom_message']
+  $infomsg = $cfg['update_custom_message'];
 }
 
 /* parse filter  */
