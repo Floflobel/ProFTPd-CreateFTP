@@ -58,6 +58,10 @@ $cfg['max_uid'] = 19999;
 // that have a prefix like "pre-username", the first occurence of separator is recognized only!
 $cfg['userid_filter_separator'] = ""; // try "-" or "_" as separators
 
+//Custom message (creation and change of password)
+$cfg['create_custom_message'] = 'The SFTP has been created. <br /> SFTP name: ' . $_GET["create_userid"] . '<br /> Password: ' . $_GET["create_password"]; 
+$cfg['update_custom_message'] = 'The SFTP password has been updated. <br /> SFTP name: ' . $_GET["update_userid"] . ' <br /> Password: ' . $_GET["update_password"];
+
 // use this block for a mysql backend
 $cfg['db_type'] = "mysqli"; // if unset, 'db_type' defaults to mysqli
 $cfg['db_host'] = "localhost";
